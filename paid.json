@@ -1,0 +1,34 @@
+[
+ {
+  "id": "instagram",
+  "platform": "Instagram",
+  "ads_found": "None",
+  "spend_inr": 0,
+  "checked": "Meta Ads Manager, last 30 days to 18 Nov",
+  "finding": "MNRE's ad account has no campaigns. Views are organic unless a collaborating account (PM Surya Ghar, Bharat RE Summit) or the agency boosted a post from its own ad account."
+ },
+ {
+  "id": "facebook",
+  "platform": "Facebook",
+  "ads_found": "None",
+  "spend_inr": 0,
+  "checked": "Meta Ads Manager, last 30 days to 18 Nov",
+  "finding": "Same ad account as Instagram, with no campaigns. Views are treated as organic."
+ },
+ {
+  "id": "youtube",
+  "platform": "YouTube",
+  "ads_found": "None",
+  "spend_inr": 0,
+  "checked": "YouTube Studio traffic sources, last 28 days to 18 Nov",
+  "finding": "No YouTube advertising traffic source appears, so views come from search, external sites, browse and suggested videos."
+ },
+ {
+  "id": "x",
+  "platform": "X",
+  "ads_found": "None",
+  "spend_inr": 0,
+  "checked": "X Ads Manager, 13 to 19 Nov",
+  "finding": "No campaigns and zero impressions or spend in that period. Earlier weeks were not separately checked."
+ }
+]

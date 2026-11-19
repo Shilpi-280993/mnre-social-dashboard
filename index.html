@@ -16,10 +16,12 @@
   --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 12px; --cds-gap-lg: 16px; --cds-gap-xl: 32px;
   --cds-pad-sm: 8px; --cds-pad-md: 12px; --cds-pad-lg: 20px; --cds-radius: 10px;
   --cds-text-secondary: #5c6b64; --cds-surface-popover: #ffffff; --cds-border: #cfd6d1; --cds-shadow-popover: 0 4px 14px rgba(0,0,0,.12); --cds-chart-axis: #b6c0ba;
+  --mn-link: #1a5fb4;
 }
-@media (prefers-color-scheme: dark) { :root { --mn-accent: #5fc0a5; --color-fg: #e8ede9; --color-fg-muted: #9aa8a0; --color-bg: #111715; --color-panel: #1a221f; --color-border-line: #2b3631; --color-ok: #5fcf8f; --color-bad: #ff8a7a; --cds-text-secondary: #9aa8a0; --cds-surface-popover: #1a221f; --cds-border: #3a4740; --cds-chart-axis: #4a5851; color-scheme: dark; } }
+@media (prefers-color-scheme: dark) { :root { --mn-accent: #5fc0a5; --mn-link: #7db3ff; --color-fg: #e8ede9; --color-fg-muted: #9aa8a0; --color-bg: #111715; --color-panel: #1a221f; --color-border-line: #2b3631; --color-ok: #5fcf8f; --color-bad: #ff8a7a; --cds-text-secondary: #9aa8a0; --cds-surface-popover: #1a221f; --cds-border: #3a4740; --cds-chart-axis: #4a5851; color-scheme: dark; } }
 body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-body); }
 .wrap { max-width: 1100px; margin: 0 auto; padding: 24px max(16px, env(safe-area-inset-left, 0px)) 48px max(16px, env(safe-area-inset-right, 0px)); }
+.mn a { color: var(--mn-link); }
 .foot { margin-top: 32px; font-size: 12px; color: var(--color-fg-muted); }
 </style>
 </head>
@@ -86,6 +88,47 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
     <p class="mn-note">Views means views on Instagram, Facebook and YouTube, and impressions on X. Engagements are content interactions on Instagram and Facebook, and total engagements on X; YouTube engagements are not captured yet. New followers are gross new follows on Instagram and Facebook, and net new subscribers on YouTube. Compare each platform with its own previous week, not with other platforms.</p>
   </section>
 
+  <section id="mn-paid">
+    <h2>Paid and organic</h2>
+    <p class="mn-note" data-draw="paid_note">—</p>
+    <div class="mn-scroll">
+      <table class="mn-table mn-text" data-source="paid" data-row-key="platform">
+        <thead>
+          <tr>
+            <th data-field="platform">Platform</th>
+            <th data-field="ads_found">Paid campaigns found</th>
+            <th data-field="spend_inr">Ad spend (₹)</th>
+            <th data-field="checked">Checked</th>
+            <th data-field="finding">What this means</th>
+          </tr>
+        </thead>
+        <tbody data-draw="paid_rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="mn-top">
+    <h2>Best performing content, <span data-draw="top_week">—</span></h2>
+    <p class="mn-note">Ranked by views on Instagram. Links open the post on Instagram. Facebook, YouTube and X top posts are not in this list yet.</p>
+    <div class="mn-scroll">
+      <table class="mn-table mn-text" data-source="top" data-row-key="rank">
+        <thead>
+          <tr>
+            <th data-field="rank">#</th>
+            <th data-field="title">Post</th>
+            <th data-field="account">Account</th>
+            <th data-field="format">Format</th>
+            <th data-field="published">Published (IST)</th>
+            <th data-field="views">Views</th>
+            <th data-field="reach">Reach</th>
+          </tr>
+        </thead>
+        <tbody data-draw="top_rows"></tbody>
+      </table>
+    </div>
+    <p class="mn-note" data-draw="top_detail">—</p>
+  </section>
+
   <section id="mn-change">
     <h2>How far each platform moved</h2>
     <div class="mn-grid">
@@ -148,6 +191,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
       <li>Audience growth slowed on Meta. New follows changed by <b data-draw="m" data-m="Instagram:new_follows:chg">—</b> on Instagram and <b data-draw="m" data-m="Facebook:new_follows:chg">—</b> on Facebook. YouTube is the only platform where net subscribers grew, by <b data-draw="m" data-m="YouTube:new_follows:chg">—</b>. X follower gains are not captured yet.</li>
       <li>YouTube viewers clicked more often when they saw a thumbnail. Click-through rose from <b data-draw="m" data-m="YouTube:ctr:prev">—</b> to <b data-draw="m" data-m="YouTube:ctr:cur">—</b> percent, even though impressions changed by <b data-draw="m" data-m="YouTube:impressions:chg">—</b>.</li>
       <li>On X, the engagement rate moved from <b data-draw="m" data-m="X:engagement_rate:prev">—</b> to <b data-draw="m" data-m="X:engagement_rate:cur">—</b> percent while impressions changed by <b data-draw="m" data-m="X:views:chg">—</b>. Fewer people saw posts, and a slightly larger share of them engaged.</li>
+      <li>The week's best content came from PM Surya Ghar posts shared with MNRE: the top post got <b data-draw="t" data-t="1:views">—</b> views and the second <b data-draw="t" data-t="2:views">—</b>. Practical, Hindi how-to content did best, such as panel cleaning and updating bank details for the subsidy.</li>
       <li>Link clicks are close to nil. Instagram recorded <b data-draw="m" data-m="Instagram:link_clicks:cur">—</b> and Facebook <b data-draw="m" data-m="Facebook:link_clicks:cur">—</b> link clicks in the latest week. If posts are meant to send people to a portal, it is worth checking that the link is in the post or the bio.</li>
     </ul>
   </section>
@@ -159,8 +203,9 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
       <li>Reach and viewers are unique counts for a whole week, so they cannot be added across days or platforms.</li>
       <li>Meta shows dates in Pacific Time, so a day's boundary sits several hours away from Indian time. X and YouTube follow their own day boundaries.</li>
       <li>Instagram views include a very small number delivered through Facebook. X impressions are rounded to the nearest hundred in X Analytics.</li>
-      <li>Paid and organic are not separated yet. The Meta login used here has no ad account attached, so paid delivery cannot be split out. Ad account access or the agency's ad report would fix this.</li>
-      <li>LinkedIn, posts published, top content and comment sentiment are not in this first version.</li>
+      <li>Paid and organic: no ads were found in MNRE's own Meta ad account, on YouTube or in X Ads Manager, so these views are treated as organic. Ads run from other accounts, such as the agency's own ad account or a collaborating account like PM Surya Ghar, would not show up here. The agency's ad report would confirm.</li>
+      <li>Meta lists post times in Indian time but groups days in Pacific Time, so a post published on the morning of 16 November in India counts in the week of 9–15 November.</li>
+      <li>The best-content list covers Instagram only, including posts shared with MNRE by the PM Surya Ghar and Bharat RE Summit accounts. LinkedIn, posts published and comment sentiment are not in this version.</li>
     </ul>
   </section>
 
@@ -171,15 +216,17 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
 </div>
 
 
-<p class="foot">Snapshot of data pulled on 19 November 2026 from the MNRE accounts on Meta Business Suite, YouTube Studio and X Analytics. LinkedIn, paid vs organic, comments and sentiment are not included yet.</p>
+<p class="foot">Snapshot of data pulled on 19 November 2026 from the MNRE accounts on Meta Business Suite, Instagram, YouTube Studio, X Analytics and the ad managers. LinkedIn and comment sentiment are not included yet.</p>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
 
 const WEEKLY = [{"engagements": 735, "link_clicks": 28, "new_follows": 300, "platform": "Facebook", "profile_visits": 3382, "pulled_on": "2026-11-19", "reach": 22100, "source": "Meta Business Suite, Insights", "views": 53800, "week_end": "2026-11-08", "week_label": "2–8 Nov", "week_start": "2026-11-02", "id": "facebook_2026-11-02"}, {"engagements": 297, "link_clicks": 18, "new_follows": 154, "platform": "Facebook", "profile_visits": 1610, "pulled_on": "2026-11-19", "reach": 12700, "source": "Meta Business Suite, Insights", "views": 24576, "week_end": "2026-11-15", "week_label": "9–15 Nov", "week_start": "2026-11-09", "id": "facebook_2026-11-09"}, {"engagements": 35274, "link_clicks": 183, "new_follows": 1190, "platform": "Instagram", "profile_visits": 2121, "pulled_on": "2026-11-19", "reach": 17200, "source": "Meta Business Suite, Insights", "views": 1290091, "week_end": "2026-11-08", "week_label": "2–8 Nov", "week_start": "2026-11-02", "id": "instagram_2026-11-02"}, {"engagements": 3958, "link_clicks": 0, "new_follows": 650, "platform": "Instagram", "profile_visits": 870, "pulled_on": "2026-11-19", "reach": 7000, "source": "Meta Business Suite, Insights", "views": 199340, "week_end": "2026-11-15", "week_label": "9–15 Nov", "week_start": "2026-11-09", "id": "instagram_2026-11-09"}, {"engagement_rate": 0.3, "engagements": 454, "likes": 223, "platform": "X", "profile_visits": 54, "pulled_on": "2026-11-19", "replies": 15, "reposts": 141, "source": "X Analytics, Account overview", "views": 122800, "week_end": "2026-11-08", "week_label": "2–8 Nov", "week_start": "2026-11-02", "id": "x_2026-11-02"}, {"engagement_rate": 0.4, "engagements": 144, "likes": 85, "platform": "X", "profile_visits": 16, "pulled_on": "2026-11-19", "replies": 6, "reposts": 31, "source": "X Analytics, Account overview", "views": 30200, "week_end": "2026-11-15", "week_label": "9–15 Nov", "week_start": "2026-11-09", "id": "x_2026-11-09"}, {"ctr": 5.2, "impressions": 20272, "new_follows": 16, "platform": "YouTube", "pulled_on": "2026-11-19", "source": "YouTube Studio, Advanced mode", "views": 3803, "watch_hours": 66.6, "week_end": "2026-11-08", "week_label": "2–8 Nov", "week_start": "2026-11-02", "id": "youtube_2026-11-02"}, {"ctr": 7.1, "impressions": 12773, "new_follows": 19, "platform": "YouTube", "pulled_on": "2026-11-19", "source": "YouTube Studio, Advanced mode", "views": 2807, "watch_hours": 53.9, "week_end": "2026-11-15", "week_label": "9–15 Nov", "week_start": "2026-11-09", "id": "youtube_2026-11-09"}];
 const DAILY = [{"date": "2026-11-02", "interactions": 198, "platform": "Facebook", "views": 14283, "id": "facebook_2026-11-02"}, {"date": "2026-11-03", "interactions": 185, "platform": "Facebook", "views": 12467, "id": "facebook_2026-11-03"}, {"date": "2026-11-04", "interactions": 179, "platform": "Facebook", "views": 12511, "id": "facebook_2026-11-04"}, {"date": "2026-11-05", "interactions": 87, "platform": "Facebook", "views": 7442, "id": "facebook_2026-11-05"}, {"date": "2026-11-06", "interactions": 42, "platform": "Facebook", "views": 3389, "id": "facebook_2026-11-06"}, {"date": "2026-11-07", "interactions": 30, "platform": "Facebook", "views": 2211, "id": "facebook_2026-11-07"}, {"date": "2026-11-08", "interactions": 14, "platform": "Facebook", "views": 1497, "id": "facebook_2026-11-08"}, {"date": "2026-11-09", "interactions": 46, "platform": "Facebook", "views": 3613, "id": "facebook_2026-11-09"}, {"date": "2026-11-10", "interactions": 29, "platform": "Facebook", "views": 2619, "id": "facebook_2026-11-10"}, {"date": "2026-11-11", "interactions": 37, "platform": "Facebook", "views": 4903, "id": "facebook_2026-11-11"}, {"date": "2026-11-12", "interactions": 74, "platform": "Facebook", "views": 5153, "id": "facebook_2026-11-12"}, {"date": "2026-11-13", "interactions": 51, "platform": "Facebook", "views": 3885, "id": "facebook_2026-11-13"}, {"date": "2026-11-14", "interactions": 27, "platform": "Facebook", "views": 2790, "id": "facebook_2026-11-14"}, {"date": "2026-11-15", "interactions": 33, "platform": "Facebook", "views": 1613, "id": "facebook_2026-11-15"}, {"date": "2026-11-02", "interactions": 1363, "platform": "Instagram", "views": 90378, "id": "instagram_2026-11-02"}, {"date": "2026-11-03", "interactions": 4506, "platform": "Instagram", "views": 385475, "id": "instagram_2026-11-03"}, {"date": "2026-11-04", "interactions": 5698, "platform": "Instagram", "views": 567610, "id": "instagram_2026-11-04"}, {"date": "2026-11-05", "interactions": 21097, "platform": "Instagram", "views": 118993, "id": "instagram_2026-11-05"}, {"date": "2026-11-06", "interactions": 1785, "platform": "Instagram", "views": 56720, "id": "instagram_2026-11-06"}, {"date": "2026-11-07", "interactions": 529, "platform": "Instagram", "views": 41965, "id": "instagram_2026-11-07"}, {"date": "2026-11-08", "interactions": 296, "platform": "Instagram", "views": 28950, "id": "instagram_2026-11-08"}, {"date": "2026-11-09", "interactions": 291, "platform": "Instagram", "views": 29140, "id": "instagram_2026-11-09"}, {"date": "2026-11-10", "interactions": 296, "platform": "Instagram", "views": 29557, "id": "instagram_2026-11-10"}, {"date": "2026-11-11", "interactions": 2402, "platform": "Instagram", "views": 42992, "id": "instagram_2026-11-11"}, {"date": "2026-11-12", "interactions": 345, "platform": "Instagram", "views": 31094, "id": "instagram_2026-11-12"}, {"date": "2026-11-13", "interactions": 256, "platform": "Instagram", "views": 26077, "id": "instagram_2026-11-13"}, {"date": "2026-11-14", "interactions": 193, "platform": "Instagram", "views": 21223, "id": "instagram_2026-11-14"}, {"date": "2026-11-15", "interactions": 175, "platform": "Instagram", "views": 19257, "id": "instagram_2026-11-15"}];
+const PAID = [{"id": "instagram", "platform": "Instagram", "ads_found": "None", "spend_inr": 0, "checked": "Meta Ads Manager, last 30 days to 18 Nov", "finding": "MNRE's ad account has no campaigns. Views are organic unless a collaborating account (PM Surya Ghar, Bharat RE Summit) or the agency boosted a post from its own ad account."}, {"id": "facebook", "platform": "Facebook", "ads_found": "None", "spend_inr": 0, "checked": "Meta Ads Manager, last 30 days to 18 Nov", "finding": "Same ad account as Instagram, with no campaigns. Views are treated as organic."}, {"id": "youtube", "platform": "YouTube", "ads_found": "None", "spend_inr": 0, "checked": "YouTube Studio traffic sources, last 28 days to 18 Nov", "finding": "No YouTube advertising traffic source appears, so views come from search, external sites, browse and suggested videos."}, {"id": "x", "platform": "X", "ads_found": "None", "spend_inr": 0, "checked": "X Ads Manager, 13 to 19 Nov", "finding": "No campaigns and zero impressions or spend in that period. Earlier weeks were not separately checked."}];
+const TOP = [{"id": "r1", "rank": 1, "week_label": "9–15 Nov", "title": "Clean your solar panels like you clean your car (Hindi carousel)", "account": "@pmsuryaghar with @mnreindia", "format": "Carousel", "published": "Sun 15 Nov, 9:43am", "views": 15676, "reach": 7169, "link": "https://www.instagram.com/p/Dfv5Xbckx3W/"}, {"id": "r2", "rank": 2, "week_label": "9–15 Nov", "title": "India's energy future is shaped by millions of everyday choices", "account": "@pmsuryaghar with @mnreindia", "format": "Carousel", "published": "Tue 10 Nov, 6:05pm", "views": 8305, "reach": 3583, "link": "https://www.instagram.com/p/Dfj61Vfk0Bh/"}, {"id": "r3", "rank": 3, "week_label": "9–15 Nov", "title": "Changed banks? Update the portal so subsidy is not delayed (Hindi reel)", "account": "@pmsuryaghar with @mnreindia", "format": "Reel", "published": "Tue 10 Nov, 4:01pm", "views": 6584, "reach": 4478, "link": "https://www.instagram.com/reel/DfjshruzUcw/", "detail": "220 interactions (170 likes, 40 shares, 1 comment), 9 seconds average watch time, and 93.8% of viewers were men, mostly aged 25 to 34."}, {"id": "r4", "rank": 4, "week_label": "9–15 Nov", "title": "India's solar capacity reaches 174.54 GW", "account": "@mnreindia", "format": "Photo", "published": "Fri 13 Nov, 11:34am", "views": 6047, "reach": 3648, "link": "https://www.instagram.com/p/Dfq8ekRo9Ui/"}, {"id": "r5", "rank": 5, "week_label": "9–15 Nov", "title": "One rooftop, a wider impact (PM Surya Ghar)", "account": "@pmsuryaghar with @mnreindia", "format": "Carousel", "published": "Wed 11 Nov, 9:55am", "views": 4821, "reach": 2803, "link": "https://www.instagram.com/p/DflneRAzZeX/"}];
 window.dash = (function () {
-  const sources = { weekly: WEEKLY, daily: DAILY };
+  const sources = { weekly: WEEKLY, daily: DAILY, paid: PAID, top: TOP };
   const calcs = {};
   const draws = [];
   function data(id) {
@@ -453,6 +500,79 @@ dash.draw('m', (el) => {
   if (v === null || v === undefined) { el.textContent = '—'; return; }
   mark(el, 'metrics', which, 'platform=' + p + '&metric=' + f);
   el.textContent = which === 'chg' ? (r.unit === 'pct' ? fmtPts(v) : fmtPct(v)) : r.unit === 'n' ? fmtInt(v) : v.toFixed(1);
+});
+
+dash.draw('paid_note', (el) => {
+  const rows = okRows('paid');
+  if (!rows || !rows.length) { el.textContent = '—'; return; }
+  el.textContent = 'No paid campaigns were found on any platform, so the views above are treated as organic. This is checked in MNRE\u2019s own ad accounts; ads run from other accounts would not appear.';
+});
+
+dash.draw('paid_rows', (tb) => {
+  const rows = okRows('paid');
+  tb.replaceChildren();
+  if (!rows) return;
+  rows.forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-key', r.platform);
+    [r.platform, r.ads_found, fmtInt(r.spend_inr), r.checked, r.finding].forEach((v, i) => {
+      const td = document.createElement('td');
+      td.textContent = v;
+      if (i >= 3) { td.style.whiteSpace = 'normal'; td.style.minWidth = '200px'; td.style.textAlign = 'left'; }
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+});
+
+dash.draw('top_week', (el) => {
+  const rows = okRows('top');
+  el.textContent = rows && rows.length ? rows[0].week_label : '—';
+});
+
+dash.draw('top_rows', (tb) => {
+  const rows = okRows('top');
+  tb.replaceChildren();
+  if (!rows) return;
+  rows.slice().sort((a, b) => a.rank - b.rank).forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-key', String(r.rank));
+    const cells = [String(r.rank), null, r.account, r.format, r.published, fmtInt(r.views), fmtInt(r.reach)];
+    cells.forEach((v, i) => {
+      const td = document.createElement('td');
+      if (i === 1) {
+        const a = document.createElement('a');
+        a.href = r.link;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.textContent = r.title;
+        td.append(a);
+        td.style.whiteSpace = 'normal';
+        td.style.minWidth = '240px';
+        td.style.textAlign = 'left';
+      } else td.textContent = v;
+      if (i === 2 || i === 3 || i === 4) td.style.textAlign = 'left';
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+});
+
+dash.draw('top_detail', (el) => {
+  const rows = okRows('top');
+  if (!rows) { el.textContent = '—'; return; }
+  const withDetail = rows.filter((r) => r.detail);
+  el.textContent = withDetail.length ? withDetail.map((r) => 'Post #' + r.rank + ': ' + r.detail).join(' ') : '';
+});
+
+dash.draw('t', (el) => {
+  const rows = okRows('top');
+  if (!rows) { el.textContent = '—'; return; }
+  const parts = el.dataset.t.split(':');
+  const r = rows.find((x) => String(x.rank) === parts[0]);
+  if (!r || r[parts[1]] === undefined || r[parts[1]] === null) { el.textContent = '—'; return; }
+  mark(el, 'top', parts[1], 'rank=' + parts[0]);
+  el.textContent = fmtInt(r[parts[1]]);
 });
 
 dash.draw('peak', (el) => {
