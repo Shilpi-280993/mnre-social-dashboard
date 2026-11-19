@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MNRE Social Media Dashboard</title>
+<style>
+:root {
+  --mn-accent: #1f6f5c;
+  --color-fg: #1b2420; --color-fg-muted: #5c6b64; --color-bg: #f7f8f6; --color-panel: #ffffff; --color-border-line: #dfe4e0;
+  --color-ok: #1a7f4b; --color-bad: #b42318;
+  --font-anthropic-sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-anthropic-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --cds-font-size-caption: 12px; --cds-font-size-body: 14px; --cds-font-size-heading: 18px; --cds-font-size-title: 28px;
+  --cds-font-weight-medium: 600;
+  --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 12px; --cds-gap-lg: 16px; --cds-gap-xl: 32px;
+  --cds-pad-sm: 8px; --cds-pad-md: 12px; --cds-pad-lg: 20px; --cds-radius: 10px;
+  --cds-text-secondary: #5c6b64; --cds-surface-popover: #ffffff; --cds-border: #cfd6d1; --cds-shadow-popover: 0 4px 14px rgba(0,0,0,.12); --cds-chart-axis: #b6c0ba;
+}
+@media (prefers-color-scheme: dark) { :root { --mn-accent: #5fc0a5; --color-fg: #e8ede9; --color-fg-muted: #9aa8a0; --color-bg: #111715; --color-panel: #1a221f; --color-border-line: #2b3631; --color-ok: #5fcf8f; --color-bad: #ff8a7a; --cds-text-secondary: #9aa8a0; --cds-surface-popover: #1a221f; --cds-border: #3a4740; --cds-chart-axis: #4a5851; color-scheme: dark; } }
+body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-body); }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 24px max(16px, env(safe-area-inset-left, 0px)) 48px max(16px, env(safe-area-inset-right, 0px)); }
+.foot { margin-top: 32px; font-size: 12px; color: var(--color-fg-muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<style>
+.mn { display: flex; flex-direction: column; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+.mn h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.mn h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-sm); }
+.mn h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-sm); }
+.mn p { margin: 0; line-height: 1.5; }
+.mn-kicker { font-size: var(--cds-font-size-caption); letter-spacing: .06em; text-transform: uppercase; color: var(--color-fg-muted); margin-bottom: var(--cds-gap-xs) !important; }
+.mn-take { font-size: var(--cds-font-size-heading); margin-top: var(--cds-gap-sm) !important; max-width: 60ch; }
+.mn-weeks { color: var(--color-fg-muted); margin-top: var(--cds-gap-xs) !important; }
+.mn-scroll { overflow-x: auto; }
+.mn-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.mn-table th, .mn-table td { padding: var(--cds-pad-sm) var(--cds-pad-md); text-align: right; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.mn-table th:first-child, .mn-table td:first-child { text-align: left; }
+.mn-table thead th { font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); vertical-align: bottom; }
+.mn-up { color: var(--color-ok); }
+.mn-down { color: var(--color-bad); }
+.mn-na { color: var(--color-fg-muted); }
+.mn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--cds-gap-lg); }
+.mn-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+.mn-card .mn-scroll { margin-top: var(--cds-gap-xs); }
+.mn-chart { position: relative; min-height: 120px; }
+.mn-chart svg { display: block; width: 100%; height: auto; }
+.mn-chart svg text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
+.mn-tip { position: absolute; pointer-events: none; padding: 4px 8px; border-radius: 6px; font-size: var(--cds-font-size-caption); background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); color: var(--cds-text-secondary); white-space: nowrap; z-index: 2; }
+.mn-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.mn-list { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: var(--cds-gap-sm); max-width: 72ch; line-height: 1.5; }
+.mn-pending { border-style: dashed; }
+.mn details { max-width: 72ch; }
+.mn summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
+</style>
+
+<div class="mn">
+  <header>
+    <p class="mn-kicker">Ministry of New and Renewable Energy · Social media review</p>
+    <h1 id="mn-title">Week-over-week performance on Instagram, Facebook, YouTube and X</h1>
+    <p class="mn-weeks">Latest week <b data-draw="cur_label">—</b> compared with <b data-draw="prev_label">—</b>. Weeks run Monday to Sunday.</p>
+    <p class="mn-take" data-draw="takeaway">—</p>
+  </header>
+
+  <section id="mn-scorecard">
+    <h2>Scorecard</h2>
+    <div class="mn-scroll">
+      <table class="mn-table" data-source="wow" data-row-key="platform">
+        <thead>
+          <tr>
+            <th data-field="platform">Platform</th>
+            <th data-field="views_cur">Views, latest week</th>
+            <th data-field="views_prev">Views, week before</th>
+            <th data-field="views_chg">Change</th>
+            <th data-field="eng_cur">Engagements, latest</th>
+            <th data-field="eng_chg">Change</th>
+            <th data-field="fol_cur">New followers, latest</th>
+            <th data-field="fol_chg">Change</th>
+          </tr>
+        </thead>
+        <tbody data-draw="score_rows"></tbody>
+      </table>
+    </div>
+    <p class="mn-note">Views means views on Instagram, Facebook and YouTube, and impressions on X. Engagements are content interactions on Instagram and Facebook, and total engagements on X; YouTube engagements are not captured yet. New followers are gross new follows on Instagram and Facebook, and net new subscribers on YouTube. Compare each platform with its own previous week, not with other platforms.</p>
+  </section>
+
+  <section id="mn-change">
+    <h2>How far each platform moved</h2>
+    <div class="mn-grid">
+      <div class="mn-card">
+        <h3>Views, change on previous week</h3>
+        <div class="mn-chart" data-draw="chg" data-source="wow" data-field="views_chg" data-label="Change in views on the previous week, by platform"></div>
+      </div>
+      <div class="mn-card">
+        <h3>Engagements, change on previous week</h3>
+        <div class="mn-chart" data-draw="chg" data-source="wow" data-field="eng_chg" data-label="Change in engagements on the previous week, by platform"></div>
+      </div>
+      <div class="mn-card">
+        <h3>New followers, change on previous week</h3>
+        <div class="mn-chart" data-draw="chg" data-source="wow" data-field="fol_chg" data-label="Change in new followers on the previous week, by platform"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mn-daily">
+    <h2>Day by day, Meta platforms</h2>
+    <div class="mn-grid">
+      <div class="mn-card">
+        <h3>Instagram, daily views</h3>
+        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Instagram" data-metric="views" data-label="Instagram daily views, 2 to 15 November"></div>
+      </div>
+      <div class="mn-card">
+        <h3>Facebook, daily views</h3>
+        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Facebook" data-metric="views" data-label="Facebook daily views, 2 to 15 November"></div>
+      </div>
+      <div class="mn-card">
+        <h3>Instagram, daily interactions</h3>
+        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Instagram" data-metric="interactions" data-label="Instagram daily interactions, 2 to 15 November"></div>
+      </div>
+      <div class="mn-card">
+        <h3>Facebook, daily interactions</h3>
+        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Facebook" data-metric="interactions" data-label="Facebook daily interactions, 2 to 15 November"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mn-platforms">
+    <h2>Each platform in detail</h2>
+    <div class="mn-grid">
+      <div class="mn-card"><h3>Instagram</h3><div class="mn-scroll" data-draw="card" data-platform="Instagram" data-source="metrics"></div></div>
+      <div class="mn-card"><h3>Facebook</h3><div class="mn-scroll" data-draw="card" data-platform="Facebook" data-source="metrics"></div></div>
+      <div class="mn-card"><h3>YouTube</h3><div class="mn-scroll" data-draw="card" data-platform="YouTube" data-source="metrics"></div></div>
+      <div class="mn-card"><h3>X</h3><div class="mn-scroll" data-draw="card" data-platform="X" data-source="metrics"></div></div>
+      <div class="mn-card mn-pending">
+        <h3>LinkedIn</h3>
+        <p>Not included yet. LinkedIn was signed out in the MNRE browser profile. Once the page admin signs in, impressions, reactions, followers and page views for the same two weeks go here.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="mn-insights">
+    <h2>What the numbers say</h2>
+    <ul class="mn-list">
+      <li>Views fell on every platform. Instagram is down <b data-draw="m" data-m="Instagram:views:chg">—</b>, but the week before was unusual: its biggest day, <b data-draw="peak" data-p="Instagram:views:date">—</b>, delivered <b data-draw="peak" data-p="Instagram:views:value">—</b> views on its own, more than any day in the latest week. X is down <b data-draw="m" data-m="X:views:chg">—</b>, Facebook <b data-draw="m" data-m="Facebook:views:chg">—</b> and YouTube <b data-draw="m" data-m="YouTube:views:chg">—</b>.</li>
+      <li>Instagram interactions are down <b data-draw="m" data-m="Instagram:engagements:chg">—</b>. One day in the earlier week, 5 November, produced most of that week's interactions, so the comparison is harsh. Facebook interactions are down <b data-draw="m" data-m="Facebook:engagements:chg">—</b>.</li>
+      <li>Audience growth slowed on Meta. New follows changed by <b data-draw="m" data-m="Instagram:new_follows:chg">—</b> on Instagram and <b data-draw="m" data-m="Facebook:new_follows:chg">—</b> on Facebook. YouTube is the only platform where net subscribers grew, by <b data-draw="m" data-m="YouTube:new_follows:chg">—</b>. X follower gains are not captured yet.</li>
+      <li>YouTube viewers clicked more often when they saw a thumbnail. Click-through rose from <b data-draw="m" data-m="YouTube:ctr:prev">—</b> to <b data-draw="m" data-m="YouTube:ctr:cur">—</b> percent, even though impressions changed by <b data-draw="m" data-m="YouTube:impressions:chg">—</b>.</li>
+      <li>On X, the engagement rate moved from <b data-draw="m" data-m="X:engagement_rate:prev">—</b> to <b data-draw="m" data-m="X:engagement_rate:cur">—</b> percent while impressions changed by <b data-draw="m" data-m="X:views:chg">—</b>. Fewer people saw posts, and a slightly larger share of them engaged.</li>
+      <li>Link clicks are close to nil. Instagram recorded <b data-draw="m" data-m="Instagram:link_clicks:cur">—</b> and Facebook <b data-draw="m" data-m="Facebook:link_clicks:cur">—</b> link clicks in the latest week. If posts are meant to send people to a portal, it is worth checking that the link is in the post or the bio.</li>
+    </ul>
+  </section>
+
+  <section id="mn-caveats">
+    <h2>Read this before quoting a number</h2>
+    <ul class="mn-list">
+      <li>Platforms count differently. Instagram and Facebook use Meta's newer views measure, X reports impressions, and YouTube reports views, now including viewing on TVs. Compare each platform only with its own previous week.</li>
+      <li>Reach and viewers are unique counts for a whole week, so they cannot be added across days or platforms.</li>
+      <li>Meta shows dates in Pacific Time, so a day's boundary sits several hours away from Indian time. X and YouTube follow their own day boundaries.</li>
+      <li>Instagram views include a very small number delivered through Facebook. X impressions are rounded to the nearest hundred in X Analytics.</li>
+      <li>Paid and organic are not separated yet. The Meta login used here has no ad account attached, so paid delivery cannot be split out. Ad account access or the agency's ad report would fix this.</li>
+      <li>LinkedIn, posts published, top content and comment sentiment are not in this first version.</li>
+    </ul>
+  </section>
+
+  <details>
+    <summary>Where the numbers come from</summary>
+    <p class="mn-note">Instagram and Facebook: Meta Business Suite, Insights, Results. YouTube: YouTube Studio, Advanced mode, with a custom date range. X: X Analytics, Account overview, with a custom date range. All pulled on 19 November 2026 from the MNRE accounts. Weekly figures are as each platform reported them, apart from Instagram and Facebook totals that were added up from the daily values Meta shows.</p>
+  </details>
+</div>
+
+
+<p class="foot">Snapshot of data pulled on 19 November 2026 from the MNRE accounts on Meta Business Suite, YouTube Studio and X Analytics. LinkedIn, paid vs organic, comments and sentiment are not included yet.</p>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+
+const WEEKLY = [{"engagements": 735, "link_clicks": 28, "new_follows": 300, "platform": "Facebook", "profile_visits": 3382, "pulled_on": "2026-11-19", "reach": 22100, "source": "Meta Business Suite, Insights", "views": 53800, "week_end": "2026-11-08", "week_label": "2–8 Nov", "week_start": "2026-11-02", "id": "facebook_2026-11-02"}, {"engagements": 297, "link_clicks": 18, "new_follows": 154, "platform": "Facebook", "profile_visits": 1610, "pulled_on": "2026-11-19", "reach": 12700, "source": "Meta Business Suite, Insights", "views": 24576, "week_end": "2026-11-15", "week_label": "9–15 Nov", "week_start": "2026-11-09", "id": "facebook_2026-11-09"}, {"engagements": 35274, "link_clicks": 183, "new_follows": 1190, "platform": "Instagram", "profile_visits": 2121, "pulled_on": "2026-11-19", "reach": 17200, "source": "Meta Business Suite, Insights", "views": 1290091, "week_end": "2026-11-08", "week_label": "2–8 Nov", "week_start": "2026-11-02", "id": "instagram_2026-11-02"}, {"engagements": 3958, "link_clicks": 0, "new_follows": 650, "platform": "Instagram", "profile_visits": 870, "pulled_on": "2026-11-19", "reach": 7000, "source": "Meta Business Suite, Insights", "views": 199340, "week_end": "2026-11-15", "week_label": "9–15 Nov", "week_start": "2026-11-09", "id": "instagram_2026-11-09"}, {"engagement_rate": 0.3, "engagements": 454, "likes": 223, "platform": "X", "profile_visits": 54, "pulled_on": "2026-11-19", "replies": 15, "reposts": 141, "source": "X Analytics, Account overview", "views": 122800, "week_end": "2026-11-08", "week_label": "2–8 Nov", "week_start": "2026-11-02", "id": "x_2026-11-02"}, {"engagement_rate": 0.4, "engagements": 144, "likes": 85, "platform": "X", "profile_visits": 16, "pulled_on": "2026-11-19", "replies": 6, "reposts": 31, "source": "X Analytics, Account overview", "views": 30200, "week_end": "2026-11-15", "week_label": "9–15 Nov", "week_start": "2026-11-09", "id": "x_2026-11-09"}, {"ctr": 5.2, "impressions": 20272, "new_follows": 16, "platform": "YouTube", "pulled_on": "2026-11-19", "source": "YouTube Studio, Advanced mode", "views": 3803, "watch_hours": 66.6, "week_end": "2026-11-08", "week_label": "2–8 Nov", "week_start": "2026-11-02", "id": "youtube_2026-11-02"}, {"ctr": 7.1, "impressions": 12773, "new_follows": 19, "platform": "YouTube", "pulled_on": "2026-11-19", "source": "YouTube Studio, Advanced mode", "views": 2807, "watch_hours": 53.9, "week_end": "2026-11-15", "week_label": "9–15 Nov", "week_start": "2026-11-09", "id": "youtube_2026-11-09"}];
+const DAILY = [{"date": "2026-11-02", "interactions": 198, "platform": "Facebook", "views": 14283, "id": "facebook_2026-11-02"}, {"date": "2026-11-03", "interactions": 185, "platform": "Facebook", "views": 12467, "id": "facebook_2026-11-03"}, {"date": "2026-11-04", "interactions": 179, "platform": "Facebook", "views": 12511, "id": "facebook_2026-11-04"}, {"date": "2026-11-05", "interactions": 87, "platform": "Facebook", "views": 7442, "id": "facebook_2026-11-05"}, {"date": "2026-11-06", "interactions": 42, "platform": "Facebook", "views": 3389, "id": "facebook_2026-11-06"}, {"date": "2026-11-07", "interactions": 30, "platform": "Facebook", "views": 2211, "id": "facebook_2026-11-07"}, {"date": "2026-11-08", "interactions": 14, "platform": "Facebook", "views": 1497, "id": "facebook_2026-11-08"}, {"date": "2026-11-09", "interactions": 46, "platform": "Facebook", "views": 3613, "id": "facebook_2026-11-09"}, {"date": "2026-11-10", "interactions": 29, "platform": "Facebook", "views": 2619, "id": "facebook_2026-11-10"}, {"date": "2026-11-11", "interactions": 37, "platform": "Facebook", "views": 4903, "id": "facebook_2026-11-11"}, {"date": "2026-11-12", "interactions": 74, "platform": "Facebook", "views": 5153, "id": "facebook_2026-11-12"}, {"date": "2026-11-13", "interactions": 51, "platform": "Facebook", "views": 3885, "id": "facebook_2026-11-13"}, {"date": "2026-11-14", "interactions": 27, "platform": "Facebook", "views": 2790, "id": "facebook_2026-11-14"}, {"date": "2026-11-15", "interactions": 33, "platform": "Facebook", "views": 1613, "id": "facebook_2026-11-15"}, {"date": "2026-11-02", "interactions": 1363, "platform": "Instagram", "views": 90378, "id": "instagram_2026-11-02"}, {"date": "2026-11-03", "interactions": 4506, "platform": "Instagram", "views": 385475, "id": "instagram_2026-11-03"}, {"date": "2026-11-04", "interactions": 5698, "platform": "Instagram", "views": 567610, "id": "instagram_2026-11-04"}, {"date": "2026-11-05", "interactions": 21097, "platform": "Instagram", "views": 118993, "id": "instagram_2026-11-05"}, {"date": "2026-11-06", "interactions": 1785, "platform": "Instagram", "views": 56720, "id": "instagram_2026-11-06"}, {"date": "2026-11-07", "interactions": 529, "platform": "Instagram", "views": 41965, "id": "instagram_2026-11-07"}, {"date": "2026-11-08", "interactions": 296, "platform": "Instagram", "views": 28950, "id": "instagram_2026-11-08"}, {"date": "2026-11-09", "interactions": 291, "platform": "Instagram", "views": 29140, "id": "instagram_2026-11-09"}, {"date": "2026-11-10", "interactions": 296, "platform": "Instagram", "views": 29557, "id": "instagram_2026-11-10"}, {"date": "2026-11-11", "interactions": 2402, "platform": "Instagram", "views": 42992, "id": "instagram_2026-11-11"}, {"date": "2026-11-12", "interactions": 345, "platform": "Instagram", "views": 31094, "id": "instagram_2026-11-12"}, {"date": "2026-11-13", "interactions": 256, "platform": "Instagram", "views": 26077, "id": "instagram_2026-11-13"}, {"date": "2026-11-14", "interactions": 193, "platform": "Instagram", "views": 21223, "id": "instagram_2026-11-14"}, {"date": "2026-11-15", "interactions": 175, "platform": "Instagram", "views": 19257, "id": "instagram_2026-11-15"}];
+window.dash = (function () {
+  const sources = { weekly: WEEKLY, daily: DAILY };
+  const calcs = {};
+  const draws = [];
+  function data(id) {
+    if (!(id in sources)) {
+      if (!calcs[id]) return { status: 'missing', data: [] };
+      sources[id] = calcs[id].fn.apply(null, calcs[id].inputs.map(function (i) { return data(i).data; }));
+    }
+    return { status: 'ok', data: sources[id] };
+  }
+  function run() {
+    draws.forEach(function (d) {
+      document.querySelectorAll('[data-draw="' + d[0] + '"]').forEach(function (el) { d[1](el); });
+    });
+  }
+  return {
+    data: data,
+    calc: function (id, o) { calcs[id] = o; },
+    draw: function (name, fn) { draws.push([name, fn]); },
+    colors: ['var(--mn-accent)'],
+    run: run
+  };
+})();
+
+
+const fmtInt = d3.format(',.0f');
+const fmtPct = (v) => (v > 0 ? '+' : '') + v.toFixed(1) + '%';
+const fmtPts = (v) => (v > 0 ? '+' : '') + v.toFixed(1) + ' pts';
+const parseDay = d3.utcParse('%Y-%m-%d');
+const dayLabel = d3.utcFormat('%-d %b');
+
+const METRIC_DEFS = {
+  Instagram: [['views', 'Views', 'n'], ['reach', 'Reach', 'n'], ['engagements', 'Content interactions', 'n'], ['profile_visits', 'Profile visits', 'n'], ['new_follows', 'New follows', 'n'], ['link_clicks', 'Link clicks', 'n']],
+  Facebook: [['views', 'Views', 'n'], ['reach', 'Viewers', 'n'], ['engagements', 'Content interactions', 'n'], ['profile_visits', 'Page visits', 'n'], ['new_follows', 'New follows', 'n'], ['link_clicks', 'Link clicks', 'n']],
+  YouTube: [['views', 'Views', 'n'], ['impressions', 'Thumbnail impressions', 'n'], ['ctr', 'Thumbnail click-through (%)', 'pct'], ['watch_hours', 'Watch time (hours)', 'hours'], ['new_follows', 'Net new subscribers', 'n']],
+  X: [['views', 'Impressions', 'n'], ['engagements', 'Engagements', 'n'], ['engagement_rate', 'Engagement rate (%)', 'pct'], ['profile_visits', 'Profile visits', 'n'], ['likes', 'Likes', 'n'], ['reposts', 'Reposts', 'n'], ['replies', 'Replies', 'n']]
+};
+
+dash.calc('metrics', {
+  title: 'Weekly metrics with change',
+  description: 'Each platform metric for the latest Monday to Sunday week, the week before, and the change between them (percent for counts, points for rates).',
+  inputs: ['weekly'],
+  fn: (weekly) => {
+    const starts = Array.from(new Set(weekly.map((r) => r.week_start))).sort();
+    const cur = starts[starts.length - 1];
+    const prev = starts[starts.length - 2];
+    const num = (v) => (v === null || v === undefined || v === '' ? null : Number(v));
+    const out = [];
+    Object.keys(METRIC_DEFS).forEach((p) => {
+      const c = weekly.find((r) => r.platform === p && r.week_start === cur) || {};
+      const q = weekly.find((r) => r.platform === p && r.week_start === prev) || {};
+      METRIC_DEFS[p].forEach(([f, label, unit]) => {
+        const a = num(c[f]);
+        const b = num(q[f]);
+        let chg = null;
+        if (a !== null && b !== null) {
+          chg = unit === 'pct' ? Math.round((a - b) * 10) / 10 : (b === 0 ? null : Math.round(((a - b) / b) * 1000) / 10);
+        }
+        out.push({ platform: p, metric: f, label, unit, cur: a, prev: b, chg });
+      });
+    });
+    return out;
+  }
+});
+
+dash.calc('wow', {
+  title: 'Week-over-week change by platform',
+  description: 'Views, engagements and new followers for the latest week against the week before, one row per platform.',
+  inputs: ['metrics'],
+  fn: (metrics) => {
+    const pick = (p, f) => metrics.find((r) => r.platform === p && r.metric === f) || {};
+    return ['Instagram', 'Facebook', 'YouTube', 'X'].map((p) => {
+      const v = pick(p, 'views');
+      const e = pick(p, 'engagements');
+      const f = pick(p, 'new_follows');
+      const nz = (x) => (x === undefined ? null : x);
+      return {
+        platform: p,
+        views_cur: nz(v.cur), views_prev: nz(v.prev), views_chg: nz(v.chg),
+        eng_cur: nz(e.cur), eng_prev: nz(e.prev), eng_chg: nz(e.chg),
+        fol_cur: nz(f.cur), fol_prev: nz(f.prev), fol_chg: nz(f.chg)
+      };
+    });
+  }
+});
+
+function mark(el, source, field, where) {
+  el.setAttribute('data-source', source);
+  el.setAttribute('data-field', field);
+  if (where) el.setAttribute('data-where', where);
+}
+function okRows(id) {
+  const g = dash.data(id);
+  return g.status === 'ok' ? g.data : null;
+}
+function weekLabel(which) {
+  const rows = okRows('weekly');
+  if (!rows || !rows.length) return null;
+  const s = Array.from(new Set(rows.map((r) => r.week_start))).sort();
+  const wk = which === 'prev' ? s[s.length - 2] : s[s.length - 1];
+  const r = rows.find((x) => x.week_start === wk);
+  return r ? r.week_label : null;
+}
+function changeClass(v) { return v > 0 ? 'mn-up' : v < 0 ? 'mn-down' : ''; }
+
+dash.draw('cur_label', (el) => { el.textContent = weekLabel('cur') || '—'; });
+dash.draw('prev_label', (el) => { el.textContent = weekLabel('prev') || '—'; });
+
+dash.draw('takeaway', (el) => {
+  const rows = okRows('wow');
+  el.replaceChildren();
+  if (!rows || !rows.length) { el.textContent = '—'; return; }
+  const withViews = rows.filter((r) => r.views_chg !== null);
+  if (!withViews.length) { el.textContent = '—'; return; }
+  const down = withViews.filter((r) => r.views_chg < 0);
+  const worst = withViews.slice().sort((a, b) => a.views_chg - b.views_chg)[0];
+  const lead = down.length === withViews.length ? 'Views fell on every platform' : down.length === 0 ? 'Views rose on every platform' : 'Views were mixed across platforms';
+  el.append(document.createTextNode(lead + '; the sharpest move was on ' + worst.platform + ', at '));
+  const s = document.createElement('b');
+  mark(s, 'wow', 'views_chg', 'platform=' + worst.platform);
+  s.textContent = fmtPct(worst.views_chg);
+  el.append(s, document.createTextNode(' against the week before.'));
+});
+
+dash.draw('score_rows', (tb) => {
+  const rows = okRows('wow');
+  tb.replaceChildren();
+  if (!rows) return;
+  rows.forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-key', r.platform);
+    const cells = [
+      [r.platform, null],
+      [r.views_cur, 'n'], [r.views_prev, 'n'], [r.views_chg, 'chg'],
+      [r.eng_cur, 'n'], [r.eng_chg, 'chg'],
+      [r.fol_cur, 'n'], [r.fol_chg, 'chg']
+    ];
+    cells.forEach(([v, kind]) => {
+      const td = document.createElement('td');
+      if (kind === null) td.textContent = v;
+      else if (v === null || v === undefined) { td.textContent = 'n/a'; td.className = 'mn-na'; }
+      else if (kind === 'chg') { td.textContent = fmtPct(v); td.className = changeClass(v); }
+      else td.textContent = fmtInt(v);
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+});
+
+function tipFor(el) {
+  let tip = el.querySelector('.mn-tip');
+  if (!tip) { tip = document.createElement('div'); tip.className = 'mn-tip'; tip.hidden = true; el.append(tip); }
+  return tip;
+}
+function showTip(el, tip, event, text) {
+  const box = el.getBoundingClientRect();
+  tip.textContent = text;
+  tip.hidden = false;
+  const x = Math.min(Math.max(event.clientX - box.left + 10, 0), Math.max(0, box.width - tip.offsetWidth));
+  tip.style.left = x + 'px';
+  tip.style.top = Math.max(0, event.clientY - box.top - 34) + 'px';
+}
+
+dash.draw('chg', (el) => {
+  const g = dash.data('wow');
+  el.replaceChildren();
+  if (g.status === 'error') { el.textContent = 'Failed to load'; return; }
+  if (g.status !== 'ok') { el.textContent = '—'; return; }
+  const f = el.dataset.field;
+  const rows = g.data.filter((r) => r[f] !== null);
+  if (!rows.length) { el.textContent = 'No data yet'; return; }
+  const W = Math.max(260, el.clientWidth || 300);
+  const rowH = 36;
+  const m = { t: 8, r: 64, b: 8, l: 76 };
+  const H = m.t + m.b + rows.length * rowH;
+  const lo = Math.min(0, d3.min(rows, (r) => r[f]));
+  const hi = Math.max(0, d3.max(rows, (r) => r[f]));
+  const x = d3.scaleLinear([lo, hi === lo ? lo + 1 : hi], [m.l, W - m.r]);
+  const svg = d3.select(el).append('svg').attr('viewBox', '0 0 ' + W + ' ' + H).attr('role', 'img').attr('aria-label', el.dataset.label || 'Change by platform');
+  const tip = tipFor(el);
+  rows.forEach((r, i) => {
+    const y = m.t + i * rowH;
+    const x0 = x(0);
+    const x1 = x(r[f]);
+    svg.append('text').attr('x', m.l - 8).attr('y', y + rowH / 2 + 4).attr('text-anchor', 'end').text(r.platform);
+    svg.append('rect').attr('x', Math.min(x0, x1)).attr('y', y + 6).attr('width', Math.max(1, Math.abs(x1 - x0))).attr('height', rowH - 12).attr('rx', 3)
+      .style('fill', r[f] < 0 ? 'var(--color-bad)' : 'var(--color-ok)')
+      .on('mousemove', (event) => showTip(el, tip, event, r.platform + ': ' + fmtPct(r[f])))
+      .on('mouseleave', () => { tip.hidden = true; });
+    svg.append('text').attr('x', W - 4).attr('y', y + rowH / 2 + 4).attr('text-anchor', 'end').text(fmtPct(r[f]));
+  });
+  svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', m.t).attr('y2', H - m.b).style('stroke', 'var(--cds-chart-axis)');
+});
+
+dash.draw('daily', (el) => {
+  const g = dash.data('daily');
+  el.replaceChildren();
+  if (g.status === 'error') { el.textContent = 'Failed to load'; return; }
+  if (g.status !== 'ok') { el.textContent = '—'; return; }
+  const p = el.dataset.platform;
+  const f = el.dataset.metric;
+  const rows = g.data.filter((r) => r.platform === p && r[f] !== undefined && r[f] !== null).sort((a, b) => (a.date < b.date ? -1 : 1));
+  if (!rows.length) { el.textContent = 'No data yet'; return; }
+  const W = Math.max(260, el.clientWidth || 300);
+  const H = 190;
+  const m = { t: 10, r: 14, b: 26, l: 46 };
+  const x = d3.scaleUtc(d3.extent(rows, (r) => parseDay(r.date)), [m.l, W - m.r]);
+  const y = d3.scaleLinear([0, d3.max(rows, (r) => r[f])], [H - m.b, m.t]).nice();
+  const svg = d3.select(el).append('svg').attr('viewBox', '0 0 ' + W + ' ' + H).attr('role', 'img').attr('aria-label', el.dataset.label || 'Daily values');
+  svg.append('g').attr('transform', 'translate(0,' + (H - m.b) + ')').call(d3.axisBottom(x).ticks(d3.utcDay.every(3)).tickFormat(dayLabel).tickSizeOuter(0));
+  svg.append('g').attr('transform', 'translate(' + m.l + ',0)').call(d3.axisLeft(y).ticks(4).tickFormat(d3.format('~s')).tickSizeOuter(0));
+  svg.selectAll('.tick text').style('fill', 'var(--cds-text-secondary)');
+  svg.selectAll('.domain, .tick line').style('stroke', 'var(--cds-chart-axis)');
+  const color = dash.colors[0];
+  svg.append('path').datum(rows).attr('d', d3.area().x((r) => x(parseDay(r.date))).y0(y(0)).y1((r) => y(r[f]))).style('fill', color).style('opacity', 0.12);
+  svg.append('path').datum(rows).attr('d', d3.line().x((r) => x(parseDay(r.date))).y((r) => y(r[f]))).style('fill', 'none').style('stroke', color).style('stroke-width', 2);
+  const tip = tipFor(el);
+  svg.selectAll('circle').data(rows).join('circle')
+    .attr('cx', (r) => x(parseDay(r.date))).attr('cy', (r) => y(r[f])).attr('r', 4).style('fill', color)
+    .on('mousemove', (event, r) => showTip(el, tip, event, dayLabel(parseDay(r.date)) + ': ' + fmtInt(r[f])))
+    .on('mouseleave', () => { tip.hidden = true; });
+});
+
+dash.draw('card', (el) => {
+  const rows = okRows('metrics');
+  el.replaceChildren();
+  if (!rows) return;
+  const p = el.dataset.platform;
+  const list = rows.filter((r) => r.platform === p);
+  const table = document.createElement('table');
+  table.className = 'mn-table';
+  const head = document.createElement('thead');
+  const hr = document.createElement('tr');
+  ['Metric', weekLabel('prev') || 'Before', weekLabel('cur') || 'Latest', 'Change'].forEach((t) => {
+    const th = document.createElement('th');
+    th.textContent = t;
+    hr.append(th);
+  });
+  head.append(hr);
+  const body = document.createElement('tbody');
+  list.forEach((r) => {
+    const tr = document.createElement('tr');
+    const where = 'platform=' + p + '&metric=' + r.metric;
+    const label = document.createElement('td');
+    label.textContent = r.label;
+    const shown = (v) => (v === null || v === undefined ? null : r.unit === 'n' ? fmtInt(v) : v.toFixed(1));
+    const mk = (field, text) => {
+      const td = document.createElement('td');
+      if (text === null) { td.textContent = 'n/a'; td.className = 'mn-na'; return td; }
+      const s = document.createElement('span');
+      mark(s, 'metrics', field, where);
+      s.textContent = text;
+      td.append(s);
+      return td;
+    };
+    const chgText = r.chg === null || r.chg === undefined ? null : r.unit === 'pct' ? fmtPts(r.chg) : fmtPct(r.chg);
+    const chgTd = mk('chg', chgText);
+    if (chgText !== null) chgTd.className = changeClass(r.chg);
+    tr.append(label, mk('prev', shown(r.prev)), mk('cur', shown(r.cur)), chgTd);
+    body.append(tr);
+  });
+  table.append(head, body);
+  el.append(table);
+});
+
+dash.draw('m', (el) => {
+  const rows = okRows('metrics');
+  if (!rows) { el.textContent = '—'; return; }
+  const [p, f, which] = el.dataset.m.split(':');
+  const r = rows.find((x) => x.platform === p && x.metric === f);
+  const v = r ? r[which] : null;
+  if (v === null || v === undefined) { el.textContent = '—'; return; }
+  mark(el, 'metrics', which, 'platform=' + p + '&metric=' + f);
+  el.textContent = which === 'chg' ? (r.unit === 'pct' ? fmtPts(v) : fmtPct(v)) : r.unit === 'n' ? fmtInt(v) : v.toFixed(1);
+});
+
+dash.draw('peak', (el) => {
+  const rows = okRows('daily');
+  if (!rows) { el.textContent = '—'; return; }
+  const [p, f, what] = el.dataset.p.split(':');
+  const list = rows.filter((r) => r.platform === p && r[f] !== undefined && r[f] !== null);
+  if (!list.length) { el.textContent = '—'; return; }
+  const best = list.reduce((a, b) => (b[f] > a[f] ? b : a));
+  const where = 'platform=' + p + '&date=' + best.date;
+  if (what === 'date') { mark(el, 'daily', 'date', where); el.textContent = dayLabel(parseDay(best.date)); }
+  else { mark(el, 'daily', f, where); el.textContent = fmtInt(best[f]); }
+});
+
+
+dash.run();
+let resizeTimer;
+window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(dash.run, 150); });
+
+</script>
+</body>
+</html>
