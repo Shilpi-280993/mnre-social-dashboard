@@ -1,0 +1,137 @@
+[
+ {
+  "id": "instagram_2026-11-09_capacity",
+  "platform": "Instagram",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "theme": "Capacity milestones",
+  "posts": 3,
+  "views": 11139
+ },
+ {
+  "id": "instagram_2026-11-09_psg",
+  "platform": "Instagram",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "theme": "PM Surya Ghar",
+  "posts": 4,
+  "views": 36281
+ },
+ {
+  "id": "instagram_2026-11-09_summit",
+  "platform": "Instagram",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "theme": "Bharat RE Summit",
+  "posts": 12,
+  "views": 30746
+ },
+ {
+  "id": "facebook_2026-11-09_capacity",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "theme": "Capacity milestones",
+  "posts": 3,
+  "views": 6986
+ },
+ {
+  "id": "facebook_2026-11-09_summit",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "theme": "Bharat RE Summit",
+  "posts": 2,
+  "views": 1650
+ },
+ {
+  "id": "facebook_2026-11-09_psg",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "theme": "PM Surya Ghar",
+  "posts": 1,
+  "views": 915
+ },
+ {
+  "id": "facebook_2026-11-09_events",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "theme": "Event photos and clips",
+  "posts": 40,
+  "views": 4004
+ },
+ {
+  "id": "instagram_2026-11-02_summit",
+  "platform": "Instagram",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "theme": "Bharat RE Summit",
+  "posts": 86,
+  "views": 1650453
+ },
+ {
+  "id": "instagram_2026-11-02_psg",
+  "platform": "Instagram",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "theme": "PM Surya Ghar",
+  "posts": 19,
+  "views": 1041146
+ },
+ {
+  "id": "instagram_2026-11-02_sector",
+  "platform": "Instagram",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "theme": "Sector and policy messages",
+  "posts": 10,
+  "views": 353832
+ },
+ {
+  "id": "instagram_2026-11-02_minister",
+  "platform": "Instagram",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "theme": "Minister and events",
+  "posts": 2,
+  "views": 137152
+ },
+ {
+  "id": "instagram_2026-11-02_events",
+  "platform": "Instagram",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "theme": "Event photos and clips",
+  "posts": 1,
+  "views": 1008
+ },
+ {
+  "id": "facebook_2026-11-02_events",
+  "platform": "Facebook",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "theme": "Event photos and clips",
+  "posts": 79,
+  "views": 9354
+ },
+ {
+  "id": "facebook_2026-11-02_summit",
+  "platform": "Facebook",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "theme": "Bharat RE Summit",
+  "posts": 1,
+  "views": 1822
+ },
+ {
+  "id": "facebook_2026-11-02_sector",
+  "platform": "Facebook",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "theme": "Sector and policy messages",
+  "posts": 1,
+  "views": 84
+ }
+]

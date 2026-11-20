@@ -1,0 +1,84 @@
+[
+ {
+  "id": "instagram_2026-11-09",
+  "platform": "Instagram",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "posts": 19,
+  "carousels": 11,
+  "reels": 2,
+  "photos": 5,
+  "other": 1,
+  "notes": "Posts shared with the PM Surya Ghar and Bharat RE Summit accounts are included."
+ },
+ {
+  "id": "instagram_2026-11-02",
+  "platform": "Instagram",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "posts": 118,
+  "carousels": 79,
+  "reels": 32,
+  "photos": 4,
+  "other": 3,
+  "notes": "Summit week. Other is two links or videos and one story."
+ },
+ {
+  "id": "facebook_2026-11-09",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "posts": 46,
+  "carousels": 0,
+  "reels": 2,
+  "photos": 42,
+  "other": 2,
+  "album_photos": 38,
+  "notes": "Photos include 38 from one album on 11 Nov. Other is a live video and a link."
+ },
+ {
+  "id": "facebook_2026-11-02",
+  "platform": "Facebook",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "posts": 81,
+  "carousels": 0,
+  "reels": 18,
+  "photos": 62,
+  "other": 1,
+  "album_photos": 61,
+  "notes": "Photos include 61 summit photos posted as an album. Other is one text post."
+ },
+ {
+  "id": "youtube_2026-11-09",
+  "platform": "YouTube",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "posts": 0,
+  "notes": "No long-form videos uploaded. The latest upload was on 19 Nov. Shorts were not checked."
+ },
+ {
+  "id": "youtube_2026-11-02",
+  "platform": "YouTube",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "posts": 0,
+  "notes": "No long-form videos uploaded. Shorts were not checked."
+ },
+ {
+  "id": "x_2026-11-09",
+  "platform": "X",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "posts": 2,
+  "notes": "Original posts only, plus at least 9 reposts."
+ },
+ {
+  "id": "x_2026-11-02",
+  "platform": "X",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "posts": 0,
+  "notes": "No original posts found, and at least 25 reposts."
+ }
+]
