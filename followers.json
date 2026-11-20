@@ -1,0 +1,39 @@
+[
+ {
+  "id": "instagram",
+  "platform": "Instagram",
+  "followers": 43115,
+  "as_of": "19 Nov",
+  "net_w0": 997,
+  "net_w1": 423,
+  "net_w2": 204,
+  "method": "Net is follows minus unfollows from Meta Insights. The last period covers 16 to 18 Nov, the days Meta had reported."
+ },
+ {
+  "id": "facebook",
+  "platform": "Facebook",
+  "followers": 85883,
+  "as_of": "19 Nov",
+  "net_w0": 246,
+  "net_w1": 97,
+  "net_w2": 89,
+  "method": "Net follows from Meta Insights. The last period covers 16 to 19 Nov."
+ },
+ {
+  "id": "youtube",
+  "platform": "YouTube",
+  "followers": 26242,
+  "as_of": "20 Nov",
+  "net_w0": 16,
+  "net_w1": 19,
+  "net_w2": 13,
+  "method": "Net subscribers from YouTube Studio. The last period covers 16 to 20 Nov."
+ },
+ {
+  "id": "x",
+  "platform": "X",
+  "followers": 314400,
+  "as_of": "20 Nov",
+  "method": "Rounded to the nearest hundred in X Analytics. X does not show follower growth in a form I could read, so growth is blank."
+ }
+]

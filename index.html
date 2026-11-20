@@ -202,6 +202,12 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
         <span class="mn-tile-sub">posts published in the latest week</span>
         <span class="mn-tile-hint">Open details</span>
       </button>
+      <button type="button" class="mn-tile" data-open="mn-followers" aria-expanded="false" aria-controls="mn-followers">
+        <span class="mn-tile-label">Followers and audience</span>
+        <span class="mn-tile-value"><span data-draw="tile" data-tile="followers">—</span></span>
+        <span class="mn-tile-sub">followers across four platforms, not unique people</span>
+        <span class="mn-tile-hint">Open details</span>
+      </button>
     </div>
   </section>
 
@@ -270,6 +276,50 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
     <h3 class="mn-sub">Latest week: comments that need a reply</h3>
     <ul class="mn-list" data-draw="reply_list"></ul>
     <p class="mn-note">Coverage: 9–15 Nov covers Instagram, YouTube, the Facebook threads that showed activity (long threads were only partly expanded) and one X reply found by search, while X Analytics counts six. 2–8 Nov covers Instagram and YouTube only; Facebook and X comments for that week were not read (X Analytics counts 15 replies). Looked templated means near-identical polished praise posted together on one post; it is counted as positive but flagged. Comments are summarised, not quoted, and commenter names are left out.</p>
+  </section>
+
+  <section id="mn-followers" hidden>
+    <h2>Follower totals and audience</h2>
+    <h3>Followers</h3>
+    <div class="mn-scroll">
+      <table class="mn-table mn-text" data-source="followcalc" data-row-key="platform">
+        <thead>
+          <tr>
+            <th data-field="platform">Platform</th>
+            <th data-field="followers">Followers now</th>
+            <th data-field="as_of">As of</th>
+            <th data-field="net_w0">Net, 2–8 Nov</th>
+            <th data-field="net_w1">Net, 9–15 Nov</th>
+            <th data-field="net_w2">Net, since 16 Nov</th>
+            <th data-field="start_est">Estimated on 2 Nov</th>
+            <th data-field="growth_pct">Growth since 2 Nov</th>
+          </tr>
+        </thead>
+        <tbody data-draw="followers_rows"></tbody>
+      </table>
+    </div>
+    <h3 class="mn-sub">Who the audience is</h3>
+    <div class="mn-scroll">
+      <table class="mn-table mn-text" data-source="audience" data-row-key="platform">
+        <thead>
+          <tr>
+            <th data-field="platform">Platform</th>
+            <th data-field="men_pct">Men (%)</th>
+            <th data-field="women_pct">Women (%)</th>
+            <th data-field="age_18_24">Aged 18–24 (%)</th>
+            <th data-field="age_25_34">25–34 (%)</th>
+            <th data-field="age_35_44">35–44 (%)</th>
+            <th data-field="age_45_54">45–54 (%)</th>
+            <th data-field="age_55_plus">55+ (%)</th>
+            <th data-field="top_city">Top city</th>
+            <th data-field="india_pct">In India (%)</th>
+            <th data-field="notes">Notes</th>
+          </tr>
+        </thead>
+        <tbody data-draw="audience_rows"></tbody>
+      </table>
+    </div>
+    <p class="mn-note">Instagram and Facebook totals and audience are followers, from Meta Business Suite. Net growth is follows minus unfollows. The follower count on 2 November is an estimate worked back from today's total and the net growth since, so it will be off if platforms removed inactive accounts. X totals are rounded. The tile adds the four totals, but the same person can follow several accounts, so it is not a count of unique people. LinkedIn is not included yet.</p>
   </section>
 
   <section id="mn-posts" hidden>
@@ -436,8 +486,10 @@ const COMMENTS = [{"id": "c1", "platform": "Instagram", "week_start": "2026-11-0
 const ORMCOUNTS = [{"id": "instagram_2026-11-09", "platform": "Instagram", "week_start": "2026-11-09", "week_label": "9–15 Nov", "positive": 1, "neutral": 0, "negative": 0, "spam": 0, "templated": 0, "read": 1, "coverage": "Read"}, {"id": "facebook_2026-11-09", "platform": "Facebook", "week_start": "2026-11-09", "week_label": "9–15 Nov", "positive": 2, "neutral": 1, "negative": 2, "spam": 0, "templated": 0, "read": 5, "coverage": "Partial"}, {"id": "youtube_2026-11-09", "platform": "YouTube", "week_start": "2026-11-09", "week_label": "9–15 Nov", "positive": 0, "neutral": 0, "negative": 0, "spam": 0, "templated": 0, "read": 0, "coverage": "Read"}, {"id": "x_2026-11-09", "platform": "X", "week_start": "2026-11-09", "week_label": "9–15 Nov", "positive": 0, "neutral": 1, "negative": 0, "spam": 0, "templated": 0, "read": 1, "coverage": "Partial"}, {"id": "instagram_2026-11-02", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "positive": 66, "neutral": 1, "negative": 1, "spam": 3, "templated": 11, "read": 71, "coverage": "Read"}, {"id": "facebook_2026-11-02", "platform": "Facebook", "week_start": "2026-11-02", "week_label": "2–8 Nov", "coverage": "Not read"}, {"id": "youtube_2026-11-02", "platform": "YouTube", "week_start": "2026-11-02", "week_label": "2–8 Nov", "positive": 0, "neutral": 0, "negative": 0, "spam": 0, "templated": 0, "read": 0, "coverage": "Read"}, {"id": "x_2026-11-02", "platform": "X", "week_start": "2026-11-02", "week_label": "2–8 Nov", "coverage": "Not read"}];
 const POSTCOUNTS = [{"id": "instagram_2026-11-09", "platform": "Instagram", "week_start": "2026-11-09", "week_label": "9–15 Nov", "posts": 19, "carousels": 11, "reels": 2, "photos": 5, "other": 1, "notes": "Posts shared with the PM Surya Ghar and Bharat RE Summit accounts are included."}, {"id": "instagram_2026-11-02", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "posts": 118, "carousels": 79, "reels": 32, "photos": 4, "other": 3, "notes": "Summit week. Other is two links or videos and one story."}, {"id": "facebook_2026-11-09", "platform": "Facebook", "week_start": "2026-11-09", "week_label": "9–15 Nov", "posts": 46, "carousels": 0, "reels": 2, "photos": 42, "other": 2, "album_photos": 38, "notes": "Photos include 38 from one album on 11 Nov. Other is a live video and a link."}, {"id": "facebook_2026-11-02", "platform": "Facebook", "week_start": "2026-11-02", "week_label": "2–8 Nov", "posts": 81, "carousels": 0, "reels": 18, "photos": 62, "other": 1, "album_photos": 61, "notes": "Photos include 61 summit photos posted as an album. Other is one text post."}, {"id": "youtube_2026-11-09", "platform": "YouTube", "week_start": "2026-11-09", "week_label": "9–15 Nov", "posts": 0, "notes": "No long-form videos uploaded. The latest upload was on 19 Nov. Shorts were not checked."}, {"id": "youtube_2026-11-02", "platform": "YouTube", "week_start": "2026-11-02", "week_label": "2–8 Nov", "posts": 0, "notes": "No long-form videos uploaded. Shorts were not checked."}, {"id": "x_2026-11-09", "platform": "X", "week_start": "2026-11-09", "week_label": "9–15 Nov", "posts": 2, "notes": "Original posts only, plus at least 9 reposts."}, {"id": "x_2026-11-02", "platform": "X", "week_start": "2026-11-02", "week_label": "2–8 Nov", "posts": 0, "notes": "No original posts found, and at least 25 reposts."}];
 const THEMES = [{"id": "instagram_2026-11-09_capacity", "platform": "Instagram", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "Capacity milestones", "posts": 3, "views": 11139}, {"id": "instagram_2026-11-09_psg", "platform": "Instagram", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "PM Surya Ghar", "posts": 4, "views": 36281}, {"id": "instagram_2026-11-09_summit", "platform": "Instagram", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "Bharat RE Summit", "posts": 12, "views": 30746}, {"id": "facebook_2026-11-09_capacity", "platform": "Facebook", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "Capacity milestones", "posts": 3, "views": 6986}, {"id": "facebook_2026-11-09_summit", "platform": "Facebook", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "Bharat RE Summit", "posts": 2, "views": 1650}, {"id": "facebook_2026-11-09_psg", "platform": "Facebook", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "PM Surya Ghar", "posts": 1, "views": 915}, {"id": "facebook_2026-11-09_events", "platform": "Facebook", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "Event photos and clips", "posts": 40, "views": 4004}, {"id": "instagram_2026-11-02_summit", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Bharat RE Summit", "posts": 86, "views": 1650453}, {"id": "instagram_2026-11-02_psg", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "PM Surya Ghar", "posts": 19, "views": 1041146}, {"id": "instagram_2026-11-02_sector", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Sector and policy messages", "posts": 10, "views": 353832}, {"id": "instagram_2026-11-02_minister", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Minister and events", "posts": 2, "views": 137152}, {"id": "instagram_2026-11-02_events", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Event photos and clips", "posts": 1, "views": 1008}, {"id": "facebook_2026-11-02_events", "platform": "Facebook", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Event photos and clips", "posts": 79, "views": 9354}, {"id": "facebook_2026-11-02_summit", "platform": "Facebook", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Bharat RE Summit", "posts": 1, "views": 1822}, {"id": "facebook_2026-11-02_sector", "platform": "Facebook", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Sector and policy messages", "posts": 1, "views": 84}];
+const FOLLOWERS = [{"id": "instagram", "platform": "Instagram", "followers": 43115, "as_of": "19 Nov", "net_w0": 997, "net_w1": 423, "net_w2": 204, "method": "Net is follows minus unfollows from Meta Insights. The last period covers 16 to 18 Nov, the days Meta had reported."}, {"id": "facebook", "platform": "Facebook", "followers": 85883, "as_of": "19 Nov", "net_w0": 246, "net_w1": 97, "net_w2": 89, "method": "Net follows from Meta Insights. The last period covers 16 to 19 Nov."}, {"id": "youtube", "platform": "YouTube", "followers": 26242, "as_of": "20 Nov", "net_w0": 16, "net_w1": 19, "net_w2": 13, "method": "Net subscribers from YouTube Studio. The last period covers 16 to 20 Nov."}, {"id": "x", "platform": "X", "followers": 314400, "as_of": "20 Nov", "method": "Rounded to the nearest hundred in X Analytics. X does not show follower growth in a form I could read, so growth is blank."}];
+const AUDIENCE = [{"id": "instagram", "platform": "Instagram", "men_pct": 90.7, "women_pct": 9.3, "age_18_24": 12.9, "age_25_34": 51.9, "age_35_44": 25.8, "age_45_54": 6.7, "age_55_plus": 2.7, "top_city": "Delhi (5.3%)", "india_pct": 96.8, "notes": "Followers. Next cities are Ahmedabad, Bengaluru and Mumbai."}, {"id": "facebook", "platform": "Facebook", "men_pct": 90.5, "women_pct": 9.5, "age_18_24": 5.1, "age_25_34": 42.1, "age_35_44": 33.8, "age_45_54": 12.3, "age_55_plus": 6.7, "top_city": "Delhi (4.6%)", "india_pct": 91.2, "notes": "Followers. Older than Instagram; Bangladesh is the next country at 0.8%."}, {"id": "youtube", "platform": "YouTube", "notes": "Studio shows only the top group among viewers: men aged 25 to 34."}, {"id": "x", "platform": "X", "men_pct": 91.8, "women_pct": 7.2, "age_18_24": 9.5, "age_25_34": 38.9, "age_35_44": 17.9, "age_45_54": 17.9, "age_55_plus": 14.8, "india_pct": 93.8, "notes": "Audience reached over 28 days, gender is inferred, and 1.1% are aged 13 to 17. No city data."}];
 window.dash = (function () {
-  const sources = { weekly: WEEKLY, daily: DAILY, paid: PAID, top: TOP, comments: COMMENTS, ormcounts: ORMCOUNTS, postcounts: POSTCOUNTS, themes: THEMES };
+  const sources = { weekly: WEEKLY, daily: DAILY, paid: PAID, top: TOP, comments: COMMENTS, ormcounts: ORMCOUNTS, postcounts: POSTCOUNTS, themes: THEMES, followers: FOLLOWERS, audience: AUDIENCE };
   const calcs = {};
   const draws = [];
   function data(id) {
@@ -512,11 +564,25 @@ dash.calc('themecalc', {
   }
 });
 
+dash.calc('followcalc', {
+  title: 'Follower totals with growth',
+  description: 'Followers now, net growth in each period, the estimated total on 2 Nov and the growth since then. Estimates work back from today\'s total.',
+  inputs: ['followers'],
+  fn: (followers) => {
+    const order = ['Instagram', 'Facebook', 'YouTube', 'X'];
+    return followers.slice().sort((a, b) => order.indexOf(a.platform) - order.indexOf(b.platform)).map((f) => {
+      const has = [f.net_w0, f.net_w1, f.net_w2].every((v) => v !== undefined && v !== null);
+      const start = has ? f.followers - f.net_w0 - f.net_w1 - f.net_w2 : null;
+      return { platform: f.platform, followers: f.followers, as_of: f.as_of, net_w0: has ? f.net_w0 : null, net_w1: has ? f.net_w1 : null, net_w2: has ? f.net_w2 : null, start_est: start, growth_pct: has ? Math.round(((f.followers - start) / start) * 1000) / 10 : null, method: f.method };
+    });
+  }
+});
+
 dash.calc('tiles', {
   title: 'Detail button figures',
   description: 'One headline figure for each detail section: ad spend found, views on the best post, comments read and posts published in the latest week.',
-  inputs: ['paid', 'top', 'ormcounts', 'postcounts'],
-  fn: (paid, top, orm, posts) => {
+  inputs: ['paid', 'top', 'ormcounts', 'postcounts', 'followers'],
+  fn: (paid, top, orm, posts, followers) => {
     const latest = (rows) => Array.from(new Set(rows.map((r) => r.week_start))).sort().pop();
     const oc = latest(orm);
     const pc = latest(posts);
@@ -524,7 +590,8 @@ dash.calc('tiles', {
       { id: 'paid', value: paid.reduce((a, r) => a + (r.spend_inr || 0), 0) },
       { id: 'top', value: top.reduce((a, r) => Math.max(a, r.views || 0), 0) },
       { id: 'comments', value: orm.filter((c) => c.week_start === oc).reduce((a, c) => a + (c.read || 0), 0) },
-      { id: 'posts', value: posts.filter((c) => c.week_start === pc).reduce((a, c) => a + (c.posts || 0), 0) }
+      { id: 'posts', value: posts.filter((c) => c.week_start === pc).reduce((a, c) => a + (c.posts || 0), 0) },
+      { id: 'followers', value: followers.reduce((a, c) => a + (c.followers || 0), 0) }
     ];
   }
 });
@@ -977,6 +1044,49 @@ dash.draw('th', (el) => {
   if (!r || r[parts[3]] === undefined) { el.textContent = '\u2014'; return; }
   mark(el, 'themes', parts[3], 'week_start=' + parts[0] + '&platform=' + parts[1] + '&theme=' + encodeURIComponent(parts[2]));
   el.textContent = fmtInt(r[parts[3]]);
+});
+
+dash.draw('followers_rows', (tb) => {
+  const rows = okRows('followcalc');
+  tb.replaceChildren();
+  if (!rows) return;
+  rows.forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-key', encodeURIComponent(r.platform));
+    const sign = (v) => (v > 0 ? '+' : '') + fmtInt(v);
+    [r.platform, r.followers, r.as_of, r.net_w0, r.net_w1, r.net_w2, r.start_est, r.growth_pct].forEach((v, i) => {
+      const td = document.createElement('td');
+      if (v === null || v === undefined) { td.textContent = 'n/a'; td.className = 'mn-na'; }
+      else if (i === 0 || i === 2) { td.textContent = v; td.style.textAlign = 'left'; }
+      else if (i >= 3 && i <= 5) { td.textContent = sign(v); td.className = v >= 0 ? 'mn-up' : 'mn-down'; }
+      else if (i === 7) { td.textContent = fmtPct(v); td.className = changeClass(v); }
+      else td.textContent = fmtInt(v);
+      if (i === 0 || i === 2) td.style.textAlign = 'left';
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+});
+
+dash.draw('audience_rows', (tb) => {
+  const rows = okRows('audience');
+  tb.replaceChildren();
+  if (!rows) return;
+  const order = ['Instagram', 'Facebook', 'YouTube', 'X'];
+  rows.slice().sort((a, b) => order.indexOf(a.platform) - order.indexOf(b.platform)).forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-key', encodeURIComponent(r.platform));
+    [r.platform, r.men_pct, r.women_pct, r.age_18_24, r.age_25_34, r.age_35_44, r.age_45_54, r.age_55_plus, r.top_city, r.india_pct, r.notes].forEach((v, i) => {
+      const td = document.createElement('td');
+      if (v === null || v === undefined) { td.textContent = 'n/a'; td.className = 'mn-na'; }
+      else if (i === 0 || i === 8 || i === 10) td.textContent = v;
+      else td.textContent = v.toFixed(1);
+      if (i === 0 || i === 8 || i === 10) td.style.textAlign = 'left';
+      if (i === 10) { td.style.whiteSpace = 'normal'; td.style.minWidth = '240px'; }
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
 });
 
 dash.draw('peak', (el) => {
