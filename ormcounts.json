@@ -1,0 +1,94 @@
+[
+ {
+  "id": "instagram_2026-11-09",
+  "platform": "Instagram",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "positive": 1,
+  "neutral": 0,
+  "negative": 0,
+  "spam": 0,
+  "templated": 0,
+  "read": 1,
+  "coverage": "Read"
+ },
+ {
+  "id": "facebook_2026-11-09",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "positive": 2,
+  "neutral": 1,
+  "negative": 2,
+  "spam": 0,
+  "templated": 0,
+  "read": 5,
+  "coverage": "Partial"
+ },
+ {
+  "id": "youtube_2026-11-09",
+  "platform": "YouTube",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "positive": 0,
+  "neutral": 0,
+  "negative": 0,
+  "spam": 0,
+  "templated": 0,
+  "read": 0,
+  "coverage": "Read"
+ },
+ {
+  "id": "x_2026-11-09",
+  "platform": "X",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "positive": 0,
+  "neutral": 1,
+  "negative": 0,
+  "spam": 0,
+  "templated": 0,
+  "read": 1,
+  "coverage": "Partial"
+ },
+ {
+  "id": "instagram_2026-11-02",
+  "platform": "Instagram",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "positive": 66,
+  "neutral": 1,
+  "negative": 1,
+  "spam": 3,
+  "templated": 11,
+  "read": 71,
+  "coverage": "Read"
+ },
+ {
+  "id": "facebook_2026-11-02",
+  "platform": "Facebook",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "coverage": "Not read"
+ },
+ {
+  "id": "youtube_2026-11-02",
+  "platform": "YouTube",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "positive": 0,
+  "neutral": 0,
+  "negative": 0,
+  "spam": 0,
+  "templated": 0,
+  "read": 0,
+  "coverage": "Read"
+ },
+ {
+  "id": "x_2026-11-02",
+  "platform": "X",
+  "week_start": "2026-11-02",
+  "week_label": "2–8 Nov",
+  "coverage": "Not read"
+ }
+]
