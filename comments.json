@@ -1,0 +1,66 @@
+[
+ {
+  "id": "c1",
+  "platform": "Instagram",
+  "week_start": "2026-11-09",
+  "sentiment": "Positive",
+  "post": "303.46 GW capacity post",
+  "summary": "Welcomes India's renewable growth and asks for continued focus on rooftop solar and storage.",
+  "needs_reply": false,
+  "link": "https://www.instagram.com/p/Dfot_GnE6s4/"
+ },
+ {
+  "id": "c2",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "sentiment": "Positive",
+  "post": "Bharat RE Summit, Secretary's message",
+  "summary": "Attended the summit and called it a wonderful programme.",
+  "needs_reply": false
+ },
+ {
+  "id": "c3",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "sentiment": "Positive",
+  "post": "303.46 GW capacity post",
+  "summary": "Praised the work.",
+  "needs_reply": false
+ },
+ {
+  "id": "c4",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "sentiment": "Negative",
+  "post": "303.46 GW capacity post",
+  "summary": "Says banks are refusing solar loans even to strong applicants and asks the ministry to act against the banks.",
+  "needs_reply": true
+ },
+ {
+  "id": "c5",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "sentiment": "Negative",
+  "post": "303.46 GW capacity post",
+  "summary": "Hostile comment asking what is actually free in the free electricity scheme.",
+  "needs_reply": true
+ },
+ {
+  "id": "c6",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "sentiment": "Neutral",
+  "post": "Minister's invitation to the summit",
+  "summary": "Off-topic political comment, not about the post.",
+  "needs_reply": false
+ },
+ {
+  "id": "c7",
+  "platform": "X",
+  "week_start": "2026-11-09",
+  "sentiment": "Neutral",
+  "post": "Solar post, reply on 13 Nov",
+  "summary": "Asks whether shade panels still work under a stated condition.",
+  "needs_reply": true
+ }
+]

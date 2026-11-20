@@ -6,7 +6,7 @@
 <title>MNRE Social Media Dashboard</title>
 <style>
 :root {
-  --mn-accent: #1f6f5c;
+  --mn-accent: #1f6f5c; --mn-link: #1a5fb4;
   --color-fg: #1b2420; --color-fg-muted: #5c6b64; --color-bg: #f7f8f6; --color-panel: #ffffff; --color-border-line: #dfe4e0;
   --color-ok: #1a7f4b; --color-bad: #b42318;
   --font-anthropic-sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -16,7 +16,6 @@
   --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 12px; --cds-gap-lg: 16px; --cds-gap-xl: 32px;
   --cds-pad-sm: 8px; --cds-pad-md: 12px; --cds-pad-lg: 20px; --cds-radius: 10px;
   --cds-text-secondary: #5c6b64; --cds-surface-popover: #ffffff; --cds-border: #cfd6d1; --cds-shadow-popover: 0 4px 14px rgba(0,0,0,.12); --cds-chart-axis: #b6c0ba;
-  --mn-link: #1a5fb4;
 }
 @media (prefers-color-scheme: dark) { :root { --mn-accent: #5fc0a5; --mn-link: #7db3ff; --color-fg: #e8ede9; --color-fg-muted: #9aa8a0; --color-bg: #111715; --color-panel: #1a221f; --color-border-line: #2b3631; --color-ok: #5fcf8f; --color-bad: #ff8a7a; --cds-text-secondary: #9aa8a0; --cds-surface-popover: #1a221f; --cds-border: #3a4740; --cds-chart-axis: #4a5851; color-scheme: dark; } }
 body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-body); }
@@ -54,6 +53,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
 .mn-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
 .mn-list { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: var(--cds-gap-sm); max-width: 72ch; line-height: 1.5; }
 .mn-pending { border-style: dashed; }
+.mn .mn-sub { margin-top: var(--cds-gap-lg); }
 .mn details { max-width: 72ch; }
 .mn summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
 </style>
@@ -127,6 +127,28 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
       </table>
     </div>
     <p class="mn-note" data-draw="top_detail">—</p>
+  </section>
+
+  <section id="mn-orm">
+    <h2>Comments and sentiment, <span data-draw="orm_week">—</span></h2>
+    <p class="mn-note" data-draw="orm_note">—</p>
+    <div class="mn-scroll">
+      <table class="mn-table" data-source="orm" data-row-key="platform">
+        <thead>
+          <tr>
+            <th data-field="platform">Platform</th>
+            <th data-field="positive">Positive</th>
+            <th data-field="neutral">Neutral or query</th>
+            <th data-field="negative">Negative</th>
+            <th data-field="total">Comments read</th>
+          </tr>
+        </thead>
+        <tbody data-draw="orm_rows"></tbody>
+      </table>
+    </div>
+    <h3 class="mn-sub">Comments that need a reply</h3>
+    <ul class="mn-list" data-draw="reply_list"></ul>
+    <p class="mn-note">Coverage: this is every comment dated in the week that could be read on Instagram posts, Facebook comment threads with activity, YouTube comments and replies to @mnreindia on X. Comment volume is very low, so read the counts, not the percentages. Facebook comments are summarised, not quoted, and commenter names are left out.</p>
   </section>
 
   <section id="mn-change">
@@ -205,7 +227,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
       <li>Instagram views include a very small number delivered through Facebook. X impressions are rounded to the nearest hundred in X Analytics.</li>
       <li>Paid and organic: no ads were found in MNRE's own Meta ad account, on YouTube or in X Ads Manager, so these views are treated as organic. Ads run from other accounts, such as the agency's own ad account or a collaborating account like PM Surya Ghar, would not show up here. The agency's ad report would confirm.</li>
       <li>Meta lists post times in Indian time but groups days in Pacific Time, so a post published on the morning of 16 November in India counts in the week of 9–15 November.</li>
-      <li>The best-content list covers Instagram only, including posts shared with MNRE by the PM Surya Ghar and Bharat RE Summit accounts. LinkedIn, posts published and comment sentiment are not in this version.</li>
+      <li>The best-content list covers Instagram only, including posts shared with MNRE by the PM Surya Ghar and Bharat RE Summit accounts. LinkedIn and posts published are not in this version. Comment figures cover only the latest week.</li>
     </ul>
   </section>
 
@@ -216,7 +238,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
 </div>
 
 
-<p class="foot">Snapshot of data pulled on 19 November 2026 from the MNRE accounts on Meta Business Suite, Instagram, YouTube Studio, X Analytics and the ad managers. LinkedIn and comment sentiment are not included yet.</p>
+<p class="foot">Snapshot of data pulled on 19 and 20 November 2026 from the MNRE accounts on Meta Business Suite, Instagram, YouTube Studio, X Analytics and the ad managers. LinkedIn is not included yet.</p>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
@@ -225,8 +247,9 @@ const WEEKLY = [{"engagements": 735, "link_clicks": 28, "new_follows": 300, "pla
 const DAILY = [{"date": "2026-11-02", "interactions": 198, "platform": "Facebook", "views": 14283, "id": "facebook_2026-11-02"}, {"date": "2026-11-03", "interactions": 185, "platform": "Facebook", "views": 12467, "id": "facebook_2026-11-03"}, {"date": "2026-11-04", "interactions": 179, "platform": "Facebook", "views": 12511, "id": "facebook_2026-11-04"}, {"date": "2026-11-05", "interactions": 87, "platform": "Facebook", "views": 7442, "id": "facebook_2026-11-05"}, {"date": "2026-11-06", "interactions": 42, "platform": "Facebook", "views": 3389, "id": "facebook_2026-11-06"}, {"date": "2026-11-07", "interactions": 30, "platform": "Facebook", "views": 2211, "id": "facebook_2026-11-07"}, {"date": "2026-11-08", "interactions": 14, "platform": "Facebook", "views": 1497, "id": "facebook_2026-11-08"}, {"date": "2026-11-09", "interactions": 46, "platform": "Facebook", "views": 3613, "id": "facebook_2026-11-09"}, {"date": "2026-11-10", "interactions": 29, "platform": "Facebook", "views": 2619, "id": "facebook_2026-11-10"}, {"date": "2026-11-11", "interactions": 37, "platform": "Facebook", "views": 4903, "id": "facebook_2026-11-11"}, {"date": "2026-11-12", "interactions": 74, "platform": "Facebook", "views": 5153, "id": "facebook_2026-11-12"}, {"date": "2026-11-13", "interactions": 51, "platform": "Facebook", "views": 3885, "id": "facebook_2026-11-13"}, {"date": "2026-11-14", "interactions": 27, "platform": "Facebook", "views": 2790, "id": "facebook_2026-11-14"}, {"date": "2026-11-15", "interactions": 33, "platform": "Facebook", "views": 1613, "id": "facebook_2026-11-15"}, {"date": "2026-11-02", "interactions": 1363, "platform": "Instagram", "views": 90378, "id": "instagram_2026-11-02"}, {"date": "2026-11-03", "interactions": 4506, "platform": "Instagram", "views": 385475, "id": "instagram_2026-11-03"}, {"date": "2026-11-04", "interactions": 5698, "platform": "Instagram", "views": 567610, "id": "instagram_2026-11-04"}, {"date": "2026-11-05", "interactions": 21097, "platform": "Instagram", "views": 118993, "id": "instagram_2026-11-05"}, {"date": "2026-11-06", "interactions": 1785, "platform": "Instagram", "views": 56720, "id": "instagram_2026-11-06"}, {"date": "2026-11-07", "interactions": 529, "platform": "Instagram", "views": 41965, "id": "instagram_2026-11-07"}, {"date": "2026-11-08", "interactions": 296, "platform": "Instagram", "views": 28950, "id": "instagram_2026-11-08"}, {"date": "2026-11-09", "interactions": 291, "platform": "Instagram", "views": 29140, "id": "instagram_2026-11-09"}, {"date": "2026-11-10", "interactions": 296, "platform": "Instagram", "views": 29557, "id": "instagram_2026-11-10"}, {"date": "2026-11-11", "interactions": 2402, "platform": "Instagram", "views": 42992, "id": "instagram_2026-11-11"}, {"date": "2026-11-12", "interactions": 345, "platform": "Instagram", "views": 31094, "id": "instagram_2026-11-12"}, {"date": "2026-11-13", "interactions": 256, "platform": "Instagram", "views": 26077, "id": "instagram_2026-11-13"}, {"date": "2026-11-14", "interactions": 193, "platform": "Instagram", "views": 21223, "id": "instagram_2026-11-14"}, {"date": "2026-11-15", "interactions": 175, "platform": "Instagram", "views": 19257, "id": "instagram_2026-11-15"}];
 const PAID = [{"id": "instagram", "platform": "Instagram", "ads_found": "None", "spend_inr": 0, "checked": "Meta Ads Manager, last 30 days to 18 Nov", "finding": "MNRE's ad account has no campaigns. Views are organic unless a collaborating account (PM Surya Ghar, Bharat RE Summit) or the agency boosted a post from its own ad account."}, {"id": "facebook", "platform": "Facebook", "ads_found": "None", "spend_inr": 0, "checked": "Meta Ads Manager, last 30 days to 18 Nov", "finding": "Same ad account as Instagram, with no campaigns. Views are treated as organic."}, {"id": "youtube", "platform": "YouTube", "ads_found": "None", "spend_inr": 0, "checked": "YouTube Studio traffic sources, last 28 days to 18 Nov", "finding": "No YouTube advertising traffic source appears, so views come from search, external sites, browse and suggested videos."}, {"id": "x", "platform": "X", "ads_found": "None", "spend_inr": 0, "checked": "X Ads Manager, 13 to 19 Nov", "finding": "No campaigns and zero impressions or spend in that period. Earlier weeks were not separately checked."}];
 const TOP = [{"id": "r1", "rank": 1, "week_label": "9–15 Nov", "title": "Clean your solar panels like you clean your car (Hindi carousel)", "account": "@pmsuryaghar with @mnreindia", "format": "Carousel", "published": "Sun 15 Nov, 9:43am", "views": 15676, "reach": 7169, "link": "https://www.instagram.com/p/Dfv5Xbckx3W/"}, {"id": "r2", "rank": 2, "week_label": "9–15 Nov", "title": "India's energy future is shaped by millions of everyday choices", "account": "@pmsuryaghar with @mnreindia", "format": "Carousel", "published": "Tue 10 Nov, 6:05pm", "views": 8305, "reach": 3583, "link": "https://www.instagram.com/p/Dfj61Vfk0Bh/"}, {"id": "r3", "rank": 3, "week_label": "9–15 Nov", "title": "Changed banks? Update the portal so subsidy is not delayed (Hindi reel)", "account": "@pmsuryaghar with @mnreindia", "format": "Reel", "published": "Tue 10 Nov, 4:01pm", "views": 6584, "reach": 4478, "link": "https://www.instagram.com/reel/DfjshruzUcw/", "detail": "220 interactions (170 likes, 40 shares, 1 comment), 9 seconds average watch time, and 93.8% of viewers were men, mostly aged 25 to 34."}, {"id": "r4", "rank": 4, "week_label": "9–15 Nov", "title": "India's solar capacity reaches 174.54 GW", "account": "@mnreindia", "format": "Photo", "published": "Fri 13 Nov, 11:34am", "views": 6047, "reach": 3648, "link": "https://www.instagram.com/p/Dfq8ekRo9Ui/"}, {"id": "r5", "rank": 5, "week_label": "9–15 Nov", "title": "One rooftop, a wider impact (PM Surya Ghar)", "account": "@pmsuryaghar with @mnreindia", "format": "Carousel", "published": "Wed 11 Nov, 9:55am", "views": 4821, "reach": 2803, "link": "https://www.instagram.com/p/DflneRAzZeX/"}];
+const COMMENTS = [{"id": "c1", "platform": "Instagram", "week_start": "2026-11-09", "sentiment": "Positive", "post": "303.46 GW capacity post", "summary": "Welcomes India's renewable growth and asks for continued focus on rooftop solar and storage.", "needs_reply": false, "link": "https://www.instagram.com/p/Dfot_GnE6s4/"}, {"id": "c2", "platform": "Facebook", "week_start": "2026-11-09", "sentiment": "Positive", "post": "Bharat RE Summit, Secretary's message", "summary": "Attended the summit and called it a wonderful programme.", "needs_reply": false}, {"id": "c3", "platform": "Facebook", "week_start": "2026-11-09", "sentiment": "Positive", "post": "303.46 GW capacity post", "summary": "Praised the work.", "needs_reply": false}, {"id": "c4", "platform": "Facebook", "week_start": "2026-11-09", "sentiment": "Negative", "post": "303.46 GW capacity post", "summary": "Says banks are refusing solar loans even to strong applicants and asks the ministry to act against the banks.", "needs_reply": true}, {"id": "c5", "platform": "Facebook", "week_start": "2026-11-09", "sentiment": "Negative", "post": "303.46 GW capacity post", "summary": "Hostile comment asking what is actually free in the free electricity scheme.", "needs_reply": true}, {"id": "c6", "platform": "Facebook", "week_start": "2026-11-09", "sentiment": "Neutral", "post": "Minister's invitation to the summit", "summary": "Off-topic political comment, not about the post.", "needs_reply": false}, {"id": "c7", "platform": "X", "week_start": "2026-11-09", "sentiment": "Neutral", "post": "Solar post, reply on 13 Nov", "summary": "Asks whether shade panels still work under a stated condition.", "needs_reply": true}];
 window.dash = (function () {
-  const sources = { weekly: WEEKLY, daily: DAILY, paid: PAID, top: TOP };
+  const sources = { weekly: WEEKLY, daily: DAILY, paid: PAID, top: TOP, comments: COMMENTS };
   const calcs = {};
   const draws = [];
   function data(id) {
@@ -263,6 +286,29 @@ const METRIC_DEFS = {
   YouTube: [['views', 'Views', 'n'], ['impressions', 'Thumbnail impressions', 'n'], ['ctr', 'Thumbnail click-through (%)', 'pct'], ['watch_hours', 'Watch time (hours)', 'hours'], ['new_follows', 'Net new subscribers', 'n']],
   X: [['views', 'Impressions', 'n'], ['engagements', 'Engagements', 'n'], ['engagement_rate', 'Engagement rate (%)', 'pct'], ['profile_visits', 'Profile visits', 'n'], ['likes', 'Likes', 'n'], ['reposts', 'Reposts', 'n'], ['replies', 'Replies', 'n']]
 };
+
+dash.calc('orm', {
+  title: 'Comment sentiment by platform',
+  description: 'Comments read in the latest week, counted by sentiment for each platform and in total.',
+  inputs: ['comments'],
+  fn: (comments) => {
+    const weeks = Array.from(new Set(comments.map((c) => c.week_start))).sort();
+    const cur = weeks[weeks.length - 1];
+    const inWeek = comments.filter((c) => c.week_start === cur);
+    const count = (list, s) => list.filter((c) => c.sentiment === s).length;
+    const row = (name, list) => {
+      const total = list.length;
+      const pct = (n) => (total === 0 ? null : Math.round((n / total) * 1000) / 10);
+      const p = count(list, 'Positive');
+      const u = count(list, 'Neutral');
+      const n = count(list, 'Negative');
+      return { platform: name, positive: p, neutral: u, negative: n, total, positive_pct: pct(p), neutral_pct: pct(u), negative_pct: pct(n) };
+    };
+    const rows = ['Instagram', 'Facebook', 'YouTube', 'X'].map((p) => row(p, inWeek.filter((c) => c.platform === p)));
+    rows.push(row('All platforms', inWeek));
+    return rows;
+  }
+});
 
 dash.calc('metrics', {
   title: 'Weekly metrics with change',
@@ -573,6 +619,54 @@ dash.draw('t', (el) => {
   if (!r || r[parts[1]] === undefined || r[parts[1]] === null) { el.textContent = '—'; return; }
   mark(el, 'top', parts[1], 'rank=' + parts[0]);
   el.textContent = fmtInt(r[parts[1]]);
+});
+
+dash.draw('orm_week', (el) => { el.textContent = weekLabel('cur') || '\u2014'; });
+
+dash.draw('orm_rows', (tb) => {
+  const rows = okRows('orm');
+  tb.replaceChildren();
+  if (!rows) return;
+  rows.forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-key', r.platform);
+    [r.platform, r.positive, r.neutral, r.negative, r.total].forEach((v, i) => {
+      const td = document.createElement('td');
+      td.textContent = i === 0 ? v : fmtInt(v);
+      if (i === 3 && v > 0) td.className = 'mn-down';
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+});
+
+dash.draw('orm_note', (el) => {
+  const rows = okRows('orm');
+  el.replaceChildren();
+  if (!rows) { el.textContent = '\u2014'; return; }
+  const all = rows.find((r) => r.platform === 'All platforms');
+  if (!all || !all.total) { el.textContent = 'No comments were found in the week.'; return; }
+  const parts = [['positive_pct', ' positive, '], ['neutral_pct', ' neutral or queries and '], ['negative_pct', ' negative.']];
+  el.append(document.createTextNode('Of the comments read, '));
+  parts.forEach(([f, tail]) => {
+    const b = document.createElement('b');
+    mark(b, 'orm', f, 'platform=All platforms');
+    b.textContent = all[f].toFixed(1) + '%';
+    el.append(b, document.createTextNode(tail));
+  });
+});
+
+dash.draw('reply_list', (ul) => {
+  const rows = okRows('comments');
+  ul.replaceChildren();
+  if (!rows) return;
+  const todo = rows.filter((c) => c.needs_reply === true);
+  if (!todo.length) { const li = document.createElement('li'); li.textContent = 'Nothing waiting for a reply.'; ul.append(li); return; }
+  todo.forEach((c) => {
+    const li = document.createElement('li');
+    li.textContent = c.platform + ' (' + c.post + '): ' + c.summary;
+    ul.append(li);
+  });
 });
 
 dash.draw('peak', (el) => {
