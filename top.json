@@ -1,6 +1,7 @@
 [
  {
-  "id": "r1",
+  "id": "instagram_1",
+  "platform": "Instagram",
   "rank": 1,
   "week_label": "9–15 Nov",
   "title": "Clean your solar panels like you clean your car (Hindi carousel)",
@@ -12,7 +13,8 @@
   "link": "https://www.instagram.com/p/Dfv5Xbckx3W/"
  },
  {
-  "id": "r2",
+  "id": "instagram_2",
+  "platform": "Instagram",
   "rank": 2,
   "week_label": "9–15 Nov",
   "title": "India's energy future is shaped by millions of everyday choices",
@@ -24,7 +26,8 @@
   "link": "https://www.instagram.com/p/Dfj61Vfk0Bh/"
  },
  {
-  "id": "r3",
+  "id": "instagram_3",
+  "platform": "Instagram",
   "rank": 3,
   "week_label": "9–15 Nov",
   "title": "Changed banks? Update the portal so subsidy is not delayed (Hindi reel)",
@@ -37,7 +40,8 @@
   "detail": "220 interactions (170 likes, 40 shares, 1 comment), 9 seconds average watch time, and 93.8% of viewers were men, mostly aged 25 to 34."
  },
  {
-  "id": "r4",
+  "id": "instagram_4",
+  "platform": "Instagram",
   "rank": 4,
   "week_label": "9–15 Nov",
   "title": "India's solar capacity reaches 174.54 GW",
@@ -49,7 +53,8 @@
   "link": "https://www.instagram.com/p/Dfq8ekRo9Ui/"
  },
  {
-  "id": "r5",
+  "id": "instagram_5",
+  "platform": "Instagram",
   "rank": 5,
   "week_label": "9–15 Nov",
   "title": "One rooftop, a wider impact (PM Surya Ghar)",
@@ -59,5 +64,133 @@
   "views": 4821,
   "reach": 2803,
   "link": "https://www.instagram.com/p/DflneRAzZeX/"
+ },
+ {
+  "id": "facebook_1",
+  "platform": "Facebook",
+  "rank": 1,
+  "week_label": "9–15 Nov",
+  "title": "India's renewable capacity reaches 303.46 GW",
+  "account": "MNRE Facebook page",
+  "format": "Photo",
+  "published": "Thu 12 Nov, 2:45pm",
+  "views": 3250,
+  "link": "https://www.facebook.com/100067985100645/posts/1441110831498407/"
+ },
+ {
+  "id": "facebook_2",
+  "platform": "Facebook",
+  "rank": 2,
+  "week_label": "9–15 Nov",
+  "title": "India's solar capacity reaches 174.54 GW",
+  "account": "MNRE Facebook page",
+  "format": "Photo",
+  "published": "Fri 13 Nov, 11:32am",
+  "views": 2493,
+  "link": "https://www.facebook.com/100067985100645/posts/1442050458071111/"
+ },
+ {
+  "id": "facebook_3",
+  "platform": "Facebook",
+  "rank": 3,
+  "week_label": "9–15 Nov",
+  "title": "India's wind capacity reaches 59.52 GW",
+  "account": "MNRE Facebook page",
+  "format": "Photo",
+  "published": "Mon 16 Nov, 11:36am",
+  "views": 1243,
+  "link": "https://www.facebook.com/100067985100645/posts/1444933671116123/",
+  "extra": "Published on 15 Nov in Pacific Time, so it counts in this week."
+ },
+ {
+  "id": "youtube_1",
+  "platform": "YouTube",
+  "rank": 1,
+  "week_label": "9–15 Nov",
+  "title": "PM Surya Ghar – Consumer: How to submit application",
+  "account": "MNRE YouTube channel",
+  "format": "Video",
+  "published": "n/a",
+  "views": 643,
+  "link": "https://www.youtube.com/watch?v=ybAm15bn6ok",
+  "extra": "19.9 hours watched, 12.1% click-through, 1:51 average view."
+ },
+ {
+  "id": "youtube_2",
+  "platform": "YouTube",
+  "rank": 2,
+  "week_label": "9–15 Nov",
+  "title": "PM Surya Ghar – Consumer: How to redeem subsidy",
+  "account": "MNRE YouTube channel",
+  "format": "Video",
+  "published": "n/a",
+  "views": 345,
+  "link": "https://www.youtube.com/watch?v=xAOc5eP1mkA",
+  "extra": "5.0 hours watched, 11.8% click-through, 0:52 average view."
+ },
+ {
+  "id": "youtube_3",
+  "platform": "YouTube",
+  "rank": 3,
+  "week_label": "9–15 Nov",
+  "title": "PM Surya Ghar – Vendor: How to register as vendor",
+  "account": "MNRE YouTube channel",
+  "format": "Video",
+  "published": "n/a",
+  "views": 338,
+  "link": "https://www.youtube.com/watch?v=rEs_kCfPUI0",
+  "extra": "7.1 hours watched, 11.2% click-through, 1:16 average view."
+ },
+ {
+  "id": "youtube_4",
+  "platform": "YouTube",
+  "rank": 4,
+  "week_label": "9–15 Nov",
+  "title": "PM Surya Ghar – Vendor: Filling application for the consumer",
+  "account": "MNRE YouTube channel",
+  "format": "Video",
+  "published": "n/a",
+  "views": 142,
+  "link": "https://www.youtube.com/watch?v=HsQ3bcHI7Ds",
+  "extra": "3.2 hours watched, 8.6% click-through, 1:22 average view."
+ },
+ {
+  "id": "youtube_5",
+  "platform": "YouTube",
+  "rank": 5,
+  "week_label": "9–15 Nov",
+  "title": "PM Surya Ghar – Vendor: Filling installation details",
+  "account": "MNRE YouTube channel",
+  "format": "Video",
+  "published": "n/a",
+  "views": 126,
+  "link": "https://www.youtube.com/watch?v=y2GrFMGsX3Y",
+  "extra": "3.7 hours watched, 1:47 average view. Matched by title, so confirm."
+ },
+ {
+  "id": "x_1",
+  "platform": "X",
+  "rank": 1,
+  "week_label": "9–15 Nov",
+  "title": "India's renewable capacity reaches 303.46 GW",
+  "account": "@mnreindia",
+  "format": "Post",
+  "published": "Thu 12 Nov, 2:46pm",
+  "views": 1809,
+  "link": "https://x.com/mnreindia/status/2120807853091066015",
+  "extra": "23 likes, 12 reposts, 3 replies."
+ },
+ {
+  "id": "x_2",
+  "platform": "X",
+  "rank": 2,
+  "week_label": "9–15 Nov",
+  "title": "India's solar capacity reaches 174.54 GW",
+  "account": "@mnreindia",
+  "format": "Post",
+  "published": "Fri 13 Nov, 11:36am",
+  "views": 1738,
+  "link": "https://x.com/mnreindia/status/2121122443133882756",
+  "extra": "19 likes, 8 reposts, no replies."
  }
 ]
