@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MNRE Social Media Dashboard</title>
-<meta name="page-version" content="202611231246">
+<meta name="page-version" content="202611231352">
 <script>
-(function () { try { var me = "202611231246"; fetch(location.pathname + "?cb=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.text(); }).then(function (t) { var m = t.match(/name="page-version" content="([^"]+)"/); if (m && m[1] !== me && location.search.indexOf("v=" + m[1]) < 0) { location.replace(location.pathname + "?v=" + encodeURIComponent(m[1])); } }).catch(function () {}); } catch (e) {} })();
+(function () { try { var me = "202611231352"; fetch(location.pathname + "?cb=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.text(); }).then(function (t) { var m = t.match(/name="page-version" content="([^"]+)"/); if (m && m[1] !== me && location.search.indexOf("v=" + m[1]) < 0) { location.replace(location.pathname + "?v=" + encodeURIComponent(m[1])); } }).catch(function () {}); } catch (e) {} })();
 </script>
 
 <style>
@@ -162,6 +162,11 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
         <span class="mn-stat-value" data-draw="stat" data-stat="photos">—</span>
         <span class="mn-stat-sub">vs <b data-draw="stat" data-stat="photos_prev">—</b> the week before</span>
       </div>
+      <div class="mn-stat">
+        <span class="mn-stat-label">Other</span>
+        <span class="mn-stat-value" data-draw="stat" data-stat="other_all">—</span>
+        <span class="mn-stat-sub">vs <b data-draw="stat" data-stat="other_all_prev">—</b> the week before</span>
+      </div>
     </div>
     <div class="mn-scroll">
       <table class="mn-table" data-source="pubcalc" data-row-key="key">
@@ -174,13 +179,13 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
             <th data-field="reels">Reels</th>
             <th data-field="carousels">Carousels</th>
             <th data-field="photos">Static photos</th>
-            <th data-field="other">Other</th>
+            <th data-field="other_all">Other</th>
           </tr>
         </thead>
         <tbody data-draw="pub_rows"></tbody>
       </table>
     </div>
-    <p class="mn-note">Instagram and Facebook counts are from Meta Business Suite (Instagram also listed 2 stories in the latest week, which are not counted; a reel cross-posted to Facebook is counted on both), YouTube counts long-form uploads only, and X counts original posts only (reposts are left out). Facebook counts every photo in an album as a post: <b data-draw="pc" data-pc="Facebook:album_photos:cur">—</b> of its <b data-draw="pc" data-pc="Facebook:photos:cur">—</b> photos are from one album. Other is live videos, links and text posts. Stories are not counted.</p>
+    <p class="mn-note">Reels, carousels, static photos and Other add up to Total posts. Other is live videos, links and text posts, plus every X post, because X posts are not split by format. Instagram and Facebook counts are from Meta Business Suite (Instagram also listed 2 stories in the latest week, which are not counted; a reel cross-posted to Facebook is counted on both). YouTube counts long-form videos and live streams (no Shorts were published). X counts original posts only; reposts are left out. Facebook counts every photo in an album as a post: <b data-draw="pc" data-pc="Facebook:album_photos:prev">—</b> of its <b data-draw="pc" data-pc="Facebook:photos:prev">—</b> photos in the week before were from one album, which is why that week’s photo count is so high.</p>
   </section>
 
   <section id="mn-tiles" class="mn-sec">
@@ -554,7 +559,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
 </div>
 
 
-<p class="foot">Snapshot of data pulled on 23 November 2026 from the MNRE accounts on Meta Business Suite, Instagram, YouTube Studio, X Analytics and the ad managers. Page updated 23 Nov 2026, 12:46 IST.</p>
+<p class="foot">Snapshot of data pulled on 23 November 2026 from the MNRE accounts on Meta Business Suite, Instagram, YouTube Studio, X Analytics and the ad managers. Page updated 23 Nov 2026, 13:52 IST.</p>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
@@ -677,6 +682,7 @@ dash.calc('pubcalc', {
       const o = { key: p.toLowerCase(), platform: p };
       fields.forEach((k) => { o[k] = nz(c[k]); o[k + '_prev'] = nz(q[k]); });
       o.posts_chg = o.posts !== null && o.posts_prev !== null ? o.posts - o.posts_prev : null;
+      ['', '_prev'].forEach((sfx) => { o['other_all' + sfx] = (o['posts' + sfx] || 0) - (o['reels' + sfx] || 0) - (o['carousels' + sfx] || 0) - (o['photos' + sfx] || 0); });
       return o;
     });
     const all = { key: 'all', platform: 'All platforms' };
@@ -685,6 +691,7 @@ dash.calc('pubcalc', {
       all[k + '_prev'] = out.reduce((a, r) => a + (r[k + '_prev'] || 0), 0);
     });
     all.posts_chg = all.posts - all.posts_prev;
+    ['other_all', 'other_all_prev'].forEach((k) => { all[k] = out.reduce((a, r) => a + r[k], 0); });
     out.push(all);
     return out;
   }
@@ -1168,7 +1175,7 @@ dash.draw('pub_rows', (tb) => {
   rows.forEach((r) => {
     const tr = document.createElement('tr');
     tr.setAttribute('data-key', r.key);
-    [r.platform, r.posts, r.posts_prev, r.posts_chg, r.reels, r.carousels, r.photos, r.other].forEach((v, i) => {
+    [r.platform, r.posts, r.posts_prev, r.posts_chg, r.reels, r.carousels, r.photos, r.other_all].forEach((v, i) => {
       const td = document.createElement('td');
       if (i === 0) td.textContent = v;
       else if (v === null || v === undefined) { td.textContent = '\u2013'; td.className = 'mn-na'; }
