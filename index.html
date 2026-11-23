@@ -123,8 +123,8 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
       <a href="#mn-inputs">1 Overall inputs</a>
       <a href="#mn-performance">2 Overall performance</a>
       <a href="#mn-working">3 What is working</a>
-      <a href="#mn-comments">4 Comments</a>
       <a href="#mn-tiles">More detail</a>
+      <a href="#mn-comments">4 Comments</a>
     </nav>
   </header>
 
@@ -341,53 +341,6 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
     </div>
   </section>
 
-  <section id="mn-comments" class="mn-sec">
-    <div class="mn-sechead">
-      <span class="mn-num" aria-hidden="true">4</span>
-      <div>
-        <h2>Comments</h2>
-        <p class="mn-note">What people said, counted by sentiment. Comments are summarised, not quoted, and names are left out.</p>
-      </div>
-    </div>
-    <p class="mn-note" data-draw="orm_note">—</p>
-    <div class="mn-scroll">
-      <table class="mn-table" data-source="orm" data-row-key="week_start,platform">
-        <thead>
-          <tr>
-            <th data-field="week_label">Week</th>
-            <th data-field="platform">Platform</th>
-            <th data-field="positive">Positive</th>
-            <th data-field="neutral">Neutral or query</th>
-            <th data-field="negative">Negative</th>
-            <th data-field="spam">Spam or promo</th>
-            <th data-field="templated">Looked templated</th>
-            <th data-field="read">Comments read</th>
-            <th data-field="coverage">Coverage</th>
-          </tr>
-        </thead>
-        <tbody data-draw="orm_rows"></tbody>
-      </table>
-    </div>
-    <div>
-      <h3>Latest week: what people said</h3>
-      <div class="mn-scroll">
-        <table class="mn-table mn-text" data-source="comments" data-row-key="id">
-          <thead>
-            <tr>
-              <th data-field="platform">Platform</th>
-              <th data-field="post">Post</th>
-              <th data-field="sentiment">Sentiment</th>
-              <th data-field="summary">What the comment says</th>
-              <th data-field="needs_reply">Needs a reply</th>
-            </tr>
-          </thead>
-          <tbody data-draw="comments_rows"></tbody>
-        </table>
-      </div>
-    </div>
-    <p class="mn-note">Coverage: 9–15 Nov covers Instagram, YouTube, the Facebook threads that showed activity (long threads were only partly expanded) and one X reply found by search, while X Analytics counts six. 2–8 Nov covers Instagram and YouTube only; Facebook and X comments for that week were not read (X Analytics counts 15 replies). Looked templated means near-identical polished praise posted together on one post; it is counted as positive but flagged. Comments are summarised, not quoted, and commenter names are left out.</p>
-  </section>
-
   <section id="mn-tiles" class="mn-sec">
     <div class="mn-sechead">
       <div>
@@ -547,6 +500,54 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
     <p class="mn-note">Instagram and Facebook totals and audience are followers, from Meta Business Suite. Net growth is follows minus unfollows. The follower count on 2 November is an estimate worked back from today's total and the net growth since, so it will be off if platforms removed inactive accounts. X totals are rounded. The tile adds the four totals, but the same person can follow several accounts, so it is not a count of unique people. LinkedIn is not included yet.</p>
   </section>
 
+  <section id="mn-comments" class="mn-sec">
+    <div class="mn-sechead">
+      <span class="mn-num" aria-hidden="true">4</span>
+      <div>
+        <h2>Comments</h2>
+        <p class="mn-note">What people said, counted by sentiment. Comments are summarised, not quoted, and names are left out.</p>
+      </div>
+    </div>
+    <p class="mn-note" data-draw="orm_note">—</p>
+    <div class="mn-scroll">
+      <table class="mn-table" data-source="orm" data-row-key="week_start,platform">
+        <thead>
+          <tr>
+            <th data-field="week_label">Week</th>
+            <th data-field="platform">Platform</th>
+            <th data-field="positive">Positive</th>
+            <th data-field="neutral">Neutral or query</th>
+            <th data-field="negative">Negative</th>
+            <th data-field="spam">Spam or promo</th>
+            <th data-field="templated">Looked templated</th>
+            <th data-field="read">Comments read</th>
+            <th data-field="coverage">Coverage</th>
+          </tr>
+        </thead>
+        <tbody data-draw="orm_rows"></tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Latest week: what people said</h3>
+      <div class="mn-scroll">
+        <table class="mn-table mn-text" data-source="comments" data-row-key="id">
+          <thead>
+            <tr>
+              <th data-field="platform">Platform</th>
+              <th data-field="post">Post</th>
+              <th data-field="sentiment">Sentiment</th>
+              <th data-field="summary">What the comment says</th>
+              <th data-field="needs_reply">Needs a reply</th>
+            </tr>
+          </thead>
+          <tbody data-draw="comments_rows"></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="mn-note">Coverage: 9–15 Nov covers Instagram, YouTube, the Facebook threads that showed activity (long threads were only partly expanded) and one X reply found by search, while X Analytics counts six. 2–8 Nov covers Instagram and YouTube only; Facebook and X comments for that week were not read (X Analytics counts 15 replies). Looked templated means near-identical polished praise posted together on one post; it is counted as positive but flagged. Comments are summarised, not quoted, and commenter names are left out.</p>
+  </section>
+
+  
   <details>
     <summary>Where the numbers come from</summary>
     <p class="mn-note">Instagram and Facebook: Meta Business Suite, Insights, Results. YouTube: YouTube Studio, Advanced mode, with a custom date range. X: X Analytics, Account overview, with a custom date range. All pulled on 19 November 2026 from the MNRE accounts. Meta groups days in Pacific Time and lists post times in Indian time; X Analytics and YouTube Studio follow their own day boundaries. Weekly figures are as each platform reported them, apart from Instagram and Facebook totals that were added up from the daily values Meta shows.</p>
