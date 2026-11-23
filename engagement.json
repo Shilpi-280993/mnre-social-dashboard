@@ -1,0 +1,27 @@
+[
+ {
+  "id": "instagram_2026-11-09",
+  "platform": "Instagram",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "items": 20,
+  "likes": 686,
+  "comments": 4,
+  "shares": 126,
+  "saves": 11,
+  "reel_watch_sec_per_view": 6.1,
+  "reels_measured": 2,
+  "notes": "Counted on the 20 posts Meta lists as published that week (includes one on the morning of 16 Nov, Indian time). Reel watch time is total watch time divided by views on the 2 reels: 16 h 8 min over 9,574 views."
+ },
+ {
+  "id": "facebook_2026-11-09",
+  "platform": "Facebook",
+  "week_start": "2026-11-09",
+  "week_label": "9–15 Nov",
+  "items": 14,
+  "likes": 117,
+  "comments": 10,
+  "shares": 31,
+  "notes": "Counted on the 14 items Meta lists for that week. Photos inside albums may not be listed one by one. Facebook has no saves figure, and Meta shows no reel watch time for these items."
+ }
+]

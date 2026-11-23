@@ -84,6 +84,21 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
 .mn .mn-sub { margin-top: var(--cds-gap-lg); }
 .mn details { max-width: 72ch; }
 .mn summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
+
+.mn-nav { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); margin-top: var(--cds-gap-md); }
+.mn-nav a { padding: 4px 12px; border: 1px solid var(--color-border-line); border-radius: 999px; color: var(--color-fg); text-decoration: none; font-size: var(--cds-font-size-caption); }
+.mn-nav a:hover { border-color: var(--color-fg-muted); }
+.mn-sec { display: flex; flex-direction: column; gap: var(--cds-gap-lg); scroll-margin-top: 16px; }
+.mn-sechead { display: flex; align-items: center; gap: var(--cds-gap-md); border-top: 1px solid var(--color-border-line); padding-top: var(--cds-gap-lg); }
+.mn .mn-sechead h2 { margin: 0; }
+.mn-sechead .mn-note { margin-top: 2px; }
+.mn-num { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--color-fg-muted); display: inline-flex; align-items: center; justify-content: center; font-variant-numeric: tabular-nums; font-size: var(--cds-font-size-caption); }
+.mn-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)); gap: var(--cds-gap-md); }
+.mn-stat { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: 4px; }
+.mn-stat-label { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.mn-stat-value { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.mn-stat-sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.mn-card .mn-note { margin-top: var(--cds-gap-sm); }
 </style>
 
 <div class="mn">
@@ -91,11 +106,138 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
     <p class="mn-kicker">Ministry of New and Renewable Energy · Social media review</p>
     <h1 id="mn-title">Week-over-week performance on Instagram, Facebook, YouTube and X</h1>
     <p class="mn-weeks">Latest week <b data-draw="cur_label">—</b> compared with <b data-draw="prev_label">—</b>. Weeks run Monday to Sunday.</p>
-    <p class="mn-take" data-draw="takeaway">—</p>
+    <nav class="mn-nav" aria-label="Sections">
+      <a href="#mn-inputs">1 Overall inputs</a>
+      <a href="#mn-performance">2 Overall performance</a>
+      <a href="#mn-working">3 What is working</a>
+      <a href="#mn-comments">4 Comments</a>
+      <a href="#mn-tiles">More detail</a>
+    </nav>
   </header>
 
-  <section id="mn-summary">
-    <h2>Summary: what is going well and what needs improvement</h2>
+  <section id="mn-inputs" class="mn-sec">
+    <div class="mn-sechead">
+      <span class="mn-num" aria-hidden="true">1</span>
+      <div>
+        <h2>Overall inputs</h2>
+        <p class="mn-note">What was published in the latest week, and how that compares with the week before.</p>
+      </div>
+    </div>
+    <div class="mn-stats">
+      <div class="mn-stat">
+        <span class="mn-stat-label">Total posts</span>
+        <span class="mn-stat-value" data-draw="stat" data-stat="posts">—</span>
+        <span class="mn-stat-sub">vs <b data-draw="stat" data-stat="posts_prev">—</b> the week before</span>
+      </div>
+      <div class="mn-stat">
+        <span class="mn-stat-label">Reels</span>
+        <span class="mn-stat-value" data-draw="stat" data-stat="reels">—</span>
+        <span class="mn-stat-sub">vs <b data-draw="stat" data-stat="reels_prev">—</b> the week before</span>
+      </div>
+      <div class="mn-stat">
+        <span class="mn-stat-label">Carousels</span>
+        <span class="mn-stat-value" data-draw="stat" data-stat="carousels">—</span>
+        <span class="mn-stat-sub">vs <b data-draw="stat" data-stat="carousels_prev">—</b> the week before</span>
+      </div>
+      <div class="mn-stat">
+        <span class="mn-stat-label">Static photos</span>
+        <span class="mn-stat-value" data-draw="stat" data-stat="photos">—</span>
+        <span class="mn-stat-sub">vs <b data-draw="stat" data-stat="photos_prev">—</b> the week before</span>
+      </div>
+    </div>
+    <div class="mn-scroll">
+      <table class="mn-table" data-source="pubcalc" data-row-key="key">
+        <thead>
+          <tr>
+            <th data-field="platform">Platform</th>
+            <th data-field="posts">Total posts</th>
+            <th data-field="posts_prev">Week before</th>
+            <th data-field="posts_chg">Change</th>
+            <th data-field="reels">Reels</th>
+            <th data-field="carousels">Carousels</th>
+            <th data-field="photos">Static photos</th>
+            <th data-field="other">Other</th>
+          </tr>
+        </thead>
+        <tbody data-draw="pub_rows"></tbody>
+      </table>
+    </div>
+    <p class="mn-note">Instagram and Facebook counts are from Meta Business Suite, YouTube counts long-form uploads only, and X counts original posts only (reposts are left out). Facebook counts every photo in an album as a post: <b data-draw="pc" data-pc="Facebook:album_photos:cur">—</b> of its <b data-draw="pc" data-pc="Facebook:photos:cur">—</b> photos are from one album. Other is live videos, links and text posts. Stories are not counted.</p>
+  </section>
+
+  <section id="mn-performance" class="mn-sec">
+    <div class="mn-sechead">
+      <span class="mn-num" aria-hidden="true">2</span>
+      <div>
+        <h2>Overall performance</h2>
+        <p class="mn-note">Views, reach, interactions and audience response for the latest week, with the change on the week before.</p>
+      </div>
+    </div>
+    <div>
+      <h3>At a glance</h3>
+      <div class="mn-scroll">
+      <table class="mn-table" data-source="wow" data-row-key="platform">
+        <thead>
+          <tr>
+            <th data-field="platform">Platform</th>
+            <th data-field="views_cur">Views, latest week</th>
+            <th data-field="views_prev">Views, week before</th>
+            <th data-field="views_chg">Change</th>
+            <th data-field="eng_cur">Engagements, latest</th>
+            <th data-field="eng_chg">Change</th>
+            <th data-field="fol_cur">New followers, latest</th>
+            <th data-field="fol_chg">Change</th>
+          </tr>
+        </thead>
+        <tbody data-draw="score_rows"></tbody>
+      </table>
+    </div>
+    <p class="mn-note">Views means views on Instagram, Facebook and YouTube, and impressions on X. Engagements are content interactions on Instagram and Facebook, and total engagements on X; YouTube engagements are not captured yet. New followers are gross new follows on Instagram and Facebook, and net new subscribers on YouTube. Compare each platform with its own previous week, not with other platforms.</p>
+    </div>
+    <div class="mn-grid">
+      <div class="mn-card"><h3>Instagram</h3><div class="mn-scroll" data-draw="card" data-platform="Instagram" data-source="metrics"></div>
+        <p class="mn-note">† Counted on the posts published in the latest week, so not comparable with the account totals above it. The week before was not read reliably, so it shows n/a.</p></div>
+      <div class="mn-card"><h3>Facebook</h3><div class="mn-scroll" data-draw="card" data-platform="Facebook" data-source="metrics"></div>
+        <p class="mn-note">† Counted on the items Meta lists as published in the latest week, so not comparable with the account totals above it. Facebook has no saves figure.</p></div>
+      <div class="mn-card"><h3>YouTube</h3><div class="mn-scroll" data-draw="card" data-platform="YouTube" data-source="metrics"></div></div>
+      <div class="mn-card"><h3>X</h3><div class="mn-scroll" data-draw="card" data-platform="X" data-source="metrics"></div></div>
+      <div class="mn-card mn-pending">
+        <h3>LinkedIn</h3>
+        <p>Not included yet. LinkedIn was signed out in the MNRE browser profile. Once the page admin signs in, impressions, reactions, followers and page views for the same two weeks go here.</p>
+      </div>
+    </div>
+    <p class="mn-note">Compare each platform only with its own earlier week: Instagram and Facebook use Meta's views measure, X reports impressions and YouTube reports views. Reach is a unique count for the whole week, so it cannot be added across platforms. Paid reach is zero because no ad campaigns were found in MNRE's own ad accounts, so reach is treated as organic; ads run from other accounts would not show. X and YouTube do not report a unique reach figure.</p>
+    <details id="mn-daily-details">
+      <summary>Day-by-day charts for Instagram and Facebook</summary>
+      <div class="mn-grid">
+      <div class="mn-card">
+        <h3>Instagram, daily views</h3>
+        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Instagram" data-metric="views" data-label="Instagram daily views, 2 to 15 November"></div>
+      </div>
+      <div class="mn-card">
+        <h3>Facebook, daily views</h3>
+        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Facebook" data-metric="views" data-label="Facebook daily views, 2 to 15 November"></div>
+      </div>
+      <div class="mn-card">
+        <h3>Instagram, daily interactions</h3>
+        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Instagram" data-metric="interactions" data-label="Instagram daily interactions, 2 to 15 November"></div>
+      </div>
+      <div class="mn-card">
+        <h3>Facebook, daily interactions</h3>
+        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Facebook" data-metric="interactions" data-label="Facebook daily interactions, 2 to 15 November"></div>
+      </div>
+    </div>
+    </details>
+  </section>
+
+  <section id="mn-working" class="mn-sec">
+    <div class="mn-sechead">
+      <span class="mn-num" aria-hidden="true">3</span>
+      <div>
+        <h2>What is working and what is not</h2>
+        <p class="mn-note">Three pointers each way, for all platforms together and for each platform.</p>
+      </div>
+    </div>
     <div class="mn-grid">
       <div class="mn-card mn-sum">
         <h3>Overall</h3>
@@ -175,8 +317,60 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
     </div>
   </section>
 
-  <section id="mn-tiles">
-    <h2>Details</h2>
+  <section id="mn-comments" class="mn-sec">
+    <div class="mn-sechead">
+      <span class="mn-num" aria-hidden="true">4</span>
+      <div>
+        <h2>Comments</h2>
+        <p class="mn-note">What people said, counted by sentiment. Comments are summarised, not quoted, and names are left out.</p>
+      </div>
+    </div>
+    <p class="mn-note" data-draw="orm_note">—</p>
+    <div class="mn-scroll">
+      <table class="mn-table" data-source="orm" data-row-key="week_start,platform">
+        <thead>
+          <tr>
+            <th data-field="week_label">Week</th>
+            <th data-field="platform">Platform</th>
+            <th data-field="positive">Positive</th>
+            <th data-field="neutral">Neutral or query</th>
+            <th data-field="negative">Negative</th>
+            <th data-field="spam">Spam or promo</th>
+            <th data-field="templated">Looked templated</th>
+            <th data-field="read">Comments read</th>
+            <th data-field="coverage">Coverage</th>
+          </tr>
+        </thead>
+        <tbody data-draw="orm_rows"></tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Latest week: what people said</h3>
+      <div class="mn-scroll">
+        <table class="mn-table mn-text" data-source="comments" data-row-key="id">
+          <thead>
+            <tr>
+              <th data-field="platform">Platform</th>
+              <th data-field="post">Post</th>
+              <th data-field="sentiment">Sentiment</th>
+              <th data-field="summary">What the comment says</th>
+              <th data-field="needs_reply">Needs a reply</th>
+            </tr>
+          </thead>
+          <tbody data-draw="comments_rows"></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="mn-note">Coverage: 9–15 Nov covers Instagram, YouTube, the Facebook threads that showed activity (long threads were only partly expanded) and one X reply found by search, while X Analytics counts six. 2–8 Nov covers Instagram and YouTube only; Facebook and X comments for that week were not read (X Analytics counts 15 replies). Looked templated means near-identical polished praise posted together on one post; it is counted as positive but flagged. Comments are summarised, not quoted, and commenter names are left out.</p>
+  </section>
+
+  <section id="mn-tiles" class="mn-sec">
+    <div class="mn-sechead">
+      <div>
+        <h2>More detail</h2>
+        <p class="mn-note">Open a box to see the full tables.</p>
+      </div>
+    </div>
     <div class="mn-tiles">
       <button type="button" class="mn-tile" data-open="mn-paid" aria-expanded="false" aria-controls="mn-paid">
         <span class="mn-tile-label">Paid and organic</span>
@@ -188,12 +382,6 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
         <span class="mn-tile-label">Best performing content</span>
         <span class="mn-tile-value"><span data-draw="tile" data-tile="top">—</span></span>
         <span class="mn-tile-sub">views on the best post of the week</span>
-        <span class="mn-tile-hint">Open details</span>
-      </button>
-      <button type="button" class="mn-tile" data-open="mn-orm" aria-expanded="false" aria-controls="mn-orm">
-        <span class="mn-tile-label">Comments and sentiment</span>
-        <span class="mn-tile-value"><span data-draw="tile" data-tile="comments">—</span></span>
-        <span class="mn-tile-sub">comments read in the latest week</span>
         <span class="mn-tile-hint">Open details</span>
       </button>
       <button type="button" class="mn-tile" data-open="mn-posts" aria-expanded="false" aria-controls="mn-posts">
@@ -252,30 +440,43 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
     <p class="mn-note" data-draw="top_detail">—</p>
   </section>
 
-  <section id="mn-orm" hidden>
-    <h2>Comments and sentiment</h2>
-    <p class="mn-note" data-draw="orm_note">—</p>
+  <section id="mn-posts" hidden>
+    <h2>Posts published and content themes</h2>
+    <h3>Posts published</h3>
     <div class="mn-scroll">
-      <table class="mn-table" data-source="orm" data-row-key="week_start,platform">
+      <table class="mn-table mn-text" data-source="postcounts" data-row-key="week_start,platform">
         <thead>
           <tr>
             <th data-field="week_label">Week</th>
             <th data-field="platform">Platform</th>
-            <th data-field="positive">Positive</th>
-            <th data-field="neutral">Neutral or query</th>
-            <th data-field="negative">Negative</th>
-            <th data-field="spam">Spam or promo</th>
-            <th data-field="templated">Looked templated</th>
-            <th data-field="read">Comments read</th>
-            <th data-field="coverage">Coverage</th>
+            <th data-field="posts">Posts</th>
+            <th data-field="carousels">Carousels</th>
+            <th data-field="reels">Reels</th>
+            <th data-field="photos">Photos</th>
+            <th data-field="other">Other</th>
+            <th data-field="notes">Notes</th>
           </tr>
         </thead>
-        <tbody data-draw="orm_rows"></tbody>
+        <tbody data-draw="posts_rows"></tbody>
       </table>
     </div>
-    <h3 class="mn-sub">Latest week: comments that need a reply</h3>
-    <ul class="mn-list" data-draw="reply_list"></ul>
-    <p class="mn-note">Coverage: 9–15 Nov covers Instagram, YouTube, the Facebook threads that showed activity (long threads were only partly expanded) and one X reply found by search, while X Analytics counts six. 2–8 Nov covers Instagram and YouTube only; Facebook and X comments for that week were not read (X Analytics counts 15 replies). Looked templated means near-identical polished praise posted together on one post; it is counted as positive but flagged. Comments are summarised, not quoted, and commenter names are left out.</p>
+    <h3 class="mn-sub">Content themes</h3>
+    <div class="mn-scroll">
+      <table class="mn-table mn-text" data-source="themecalc" data-row-key="key">
+        <thead>
+          <tr>
+            <th data-field="week_label">Week</th>
+            <th data-field="platform">Platform</th>
+            <th data-field="theme">Theme</th>
+            <th data-field="posts">Posts</th>
+            <th data-field="views">Views to date</th>
+            <th data-field="views_per_post">Views per post</th>
+          </tr>
+        </thead>
+        <tbody data-draw="themes_rows"></tbody>
+      </table>
+    </div>
+    <p class="mn-note">Counts cover Instagram and Facebook posts from Meta Business Suite, YouTube long-form uploads from YouTube Studio, and original posts on X. Facebook counts every photo in an album as a post. Views are lifetime views to date of the posts published that week, including views on collaborator accounts, so they run higher than the weekly views above. Themes are grouped by me from each post's account and caption: PM Surya Ghar and Bharat RE Summit posts come from those accounts, capacity milestones are the installed-capacity posts, and posts with no caption are event photos and clips.</p>
   </section>
 
   <section id="mn-followers" hidden>
@@ -322,154 +523,9 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
     <p class="mn-note">Instagram and Facebook totals and audience are followers, from Meta Business Suite. Net growth is follows minus unfollows. The follower count on 2 November is an estimate worked back from today's total and the net growth since, so it will be off if platforms removed inactive accounts. X totals are rounded. The tile adds the four totals, but the same person can follow several accounts, so it is not a count of unique people. LinkedIn is not included yet.</p>
   </section>
 
-  <section id="mn-posts" hidden>
-    <h2>Posts published and content themes</h2>
-    <h3>Posts published</h3>
-    <div class="mn-scroll">
-      <table class="mn-table mn-text" data-source="postcounts" data-row-key="week_start,platform">
-        <thead>
-          <tr>
-            <th data-field="week_label">Week</th>
-            <th data-field="platform">Platform</th>
-            <th data-field="posts">Posts</th>
-            <th data-field="carousels">Carousels</th>
-            <th data-field="reels">Reels</th>
-            <th data-field="photos">Photos</th>
-            <th data-field="other">Other</th>
-            <th data-field="notes">Notes</th>
-          </tr>
-        </thead>
-        <tbody data-draw="posts_rows"></tbody>
-      </table>
-    </div>
-    <h3 class="mn-sub">Content themes</h3>
-    <div class="mn-scroll">
-      <table class="mn-table mn-text" data-source="themecalc" data-row-key="key">
-        <thead>
-          <tr>
-            <th data-field="week_label">Week</th>
-            <th data-field="platform">Platform</th>
-            <th data-field="theme">Theme</th>
-            <th data-field="posts">Posts</th>
-            <th data-field="views">Views to date</th>
-            <th data-field="views_per_post">Views per post</th>
-          </tr>
-        </thead>
-        <tbody data-draw="themes_rows"></tbody>
-      </table>
-    </div>
-    <p class="mn-note">Counts cover Instagram and Facebook posts from Meta Business Suite, YouTube long-form uploads from YouTube Studio, and original posts on X. Facebook counts every photo in an album as a post. Views are lifetime views to date of the posts published that week, including views on collaborator accounts, so they run higher than the weekly views above. Themes are grouped by me from each post's account and caption: PM Surya Ghar and Bharat RE Summit posts come from those accounts, capacity milestones are the installed-capacity posts, and posts with no caption are event photos and clips.</p>
-  </section>
-
-  <section id="mn-scorecard">
-    <h2>Scorecard</h2>
-    <div class="mn-scroll">
-      <table class="mn-table" data-source="wow" data-row-key="platform">
-        <thead>
-          <tr>
-            <th data-field="platform">Platform</th>
-            <th data-field="views_cur">Views, latest week</th>
-            <th data-field="views_prev">Views, week before</th>
-            <th data-field="views_chg">Change</th>
-            <th data-field="eng_cur">Engagements, latest</th>
-            <th data-field="eng_chg">Change</th>
-            <th data-field="fol_cur">New followers, latest</th>
-            <th data-field="fol_chg">Change</th>
-          </tr>
-        </thead>
-        <tbody data-draw="score_rows"></tbody>
-      </table>
-    </div>
-    <p class="mn-note">Views means views on Instagram, Facebook and YouTube, and impressions on X. Engagements are content interactions on Instagram and Facebook, and total engagements on X; YouTube engagements are not captured yet. New followers are gross new follows on Instagram and Facebook, and net new subscribers on YouTube. Compare each platform with its own previous week, not with other platforms.</p>
-  </section>
-
-
-
-
-  <section id="mn-change">
-    <h2>How far each platform moved</h2>
-    <div class="mn-grid">
-      <div class="mn-card">
-        <h3>Views, change on previous week</h3>
-        <div class="mn-chart" data-draw="chg" data-source="wow" data-field="views_chg" data-label="Change in views on the previous week, by platform"></div>
-      </div>
-      <div class="mn-card">
-        <h3>Engagements, change on previous week</h3>
-        <div class="mn-chart" data-draw="chg" data-source="wow" data-field="eng_chg" data-label="Change in engagements on the previous week, by platform"></div>
-      </div>
-      <div class="mn-card">
-        <h3>New followers, change on previous week</h3>
-        <div class="mn-chart" data-draw="chg" data-source="wow" data-field="fol_chg" data-label="Change in new followers on the previous week, by platform"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="mn-daily">
-    <h2>Day by day, Meta platforms</h2>
-    <div class="mn-grid">
-      <div class="mn-card">
-        <h3>Instagram, daily views</h3>
-        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Instagram" data-metric="views" data-label="Instagram daily views, 2 to 15 November"></div>
-      </div>
-      <div class="mn-card">
-        <h3>Facebook, daily views</h3>
-        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Facebook" data-metric="views" data-label="Facebook daily views, 2 to 15 November"></div>
-      </div>
-      <div class="mn-card">
-        <h3>Instagram, daily interactions</h3>
-        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Instagram" data-metric="interactions" data-label="Instagram daily interactions, 2 to 15 November"></div>
-      </div>
-      <div class="mn-card">
-        <h3>Facebook, daily interactions</h3>
-        <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Facebook" data-metric="interactions" data-label="Facebook daily interactions, 2 to 15 November"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="mn-platforms">
-    <h2>Each platform in detail</h2>
-    <div class="mn-grid">
-      <div class="mn-card"><h3>Instagram</h3><div class="mn-scroll" data-draw="card" data-platform="Instagram" data-source="metrics"></div></div>
-      <div class="mn-card"><h3>Facebook</h3><div class="mn-scroll" data-draw="card" data-platform="Facebook" data-source="metrics"></div></div>
-      <div class="mn-card"><h3>YouTube</h3><div class="mn-scroll" data-draw="card" data-platform="YouTube" data-source="metrics"></div></div>
-      <div class="mn-card"><h3>X</h3><div class="mn-scroll" data-draw="card" data-platform="X" data-source="metrics"></div></div>
-      <div class="mn-card mn-pending">
-        <h3>LinkedIn</h3>
-        <p>Not included yet. LinkedIn was signed out in the MNRE browser profile. Once the page admin signs in, impressions, reactions, followers and page views for the same two weeks go here.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="mn-insights">
-    <h2>What the numbers say</h2>
-    <ul class="mn-list">
-      <li>Views fell on every platform. Instagram is down <b data-draw="m" data-m="Instagram:views:chg">—</b>, but the week before was unusual: its biggest day, <b data-draw="peak" data-p="Instagram:views:date">—</b>, delivered <b data-draw="peak" data-p="Instagram:views:value">—</b> views on its own, more than any day in the latest week. X is down <b data-draw="m" data-m="X:views:chg">—</b>, Facebook <b data-draw="m" data-m="Facebook:views:chg">—</b> and YouTube <b data-draw="m" data-m="YouTube:views:chg">—</b>.</li>
-      <li>Instagram interactions are down <b data-draw="m" data-m="Instagram:engagements:chg">—</b>. One day in the earlier week, 5 November, produced most of that week's interactions, so the comparison is harsh. Facebook interactions are down <b data-draw="m" data-m="Facebook:engagements:chg">—</b>.</li>
-      <li>Audience growth slowed on Meta. New follows changed by <b data-draw="m" data-m="Instagram:new_follows:chg">—</b> on Instagram and <b data-draw="m" data-m="Facebook:new_follows:chg">—</b> on Facebook. YouTube is the only platform where net subscribers grew, by <b data-draw="m" data-m="YouTube:new_follows:chg">—</b>. X follower gains are not captured yet.</li>
-      <li>YouTube viewers clicked more often when they saw a thumbnail. Click-through rose from <b data-draw="m" data-m="YouTube:ctr:prev">—</b> to <b data-draw="m" data-m="YouTube:ctr:cur">—</b> percent, even though impressions changed by <b data-draw="m" data-m="YouTube:impressions:chg">—</b>.</li>
-      <li>On X, the engagement rate moved from <b data-draw="m" data-m="X:engagement_rate:prev">—</b> to <b data-draw="m" data-m="X:engagement_rate:cur">—</b> percent while impressions changed by <b data-draw="m" data-m="X:views:chg">—</b>. Fewer people saw posts, and a slightly larger share of them engaged.</li>
-      <li>The week's best content came from PM Surya Ghar posts shared with MNRE: the top post got <b data-draw="t" data-t="Instagram:1:views">—</b> views and the second <b data-draw="t" data-t="Instagram:2:views">—</b>. Practical, Hindi how-to content did best, such as panel cleaning and updating bank details for the subsidy.</li>
-      <li>Comments followed the summit. Instagram had <b data-draw="o" data-o="2026-11-02:Instagram:read">—</b> comments in the summit week and <b data-draw="o" data-o="2026-11-09:Instagram:read">—</b> the week after. Nearly all were praise, and many on one summit post looked templated, so read them as goodwill, not as a measure of reach.</li>
-      <li>Link clicks are close to nil. Instagram recorded <b data-draw="m" data-m="Instagram:link_clicks:cur">—</b> and Facebook <b data-draw="m" data-m="Facebook:link_clicks:cur">—</b> link clicks in the latest week. If posts are meant to send people to a portal, it is worth checking that the link is in the post or the bio.</li>
-    </ul>
-  </section>
-
-  <section id="mn-caveats">
-    <h2>Read this before quoting a number</h2>
-    <ul class="mn-list">
-      <li>Platforms count differently. Instagram and Facebook use Meta's newer views measure, X reports impressions, and YouTube reports views, now including viewing on TVs. Compare each platform only with its own previous week.</li>
-      <li>Reach and viewers are unique counts for a whole week, so they cannot be added across days or platforms.</li>
-      <li>Meta shows dates in Pacific Time, so a day's boundary sits several hours away from Indian time. X and YouTube follow their own day boundaries.</li>
-      <li>Instagram views include a very small number delivered through Facebook. X impressions are rounded to the nearest hundred in X Analytics.</li>
-      <li>Paid and organic: no ads were found in MNRE's own Meta ad account, on YouTube or in X Ads Manager, so these views are treated as organic. Ads run from other accounts, such as the agency's own ad account or a collaborating account like PM Surya Ghar, would not show up here. The agency's ad report would confirm.</li>
-      <li>Meta lists post times in Indian time but groups days in Pacific Time, so a post published on the morning of 16 November in India counts in the week of 9–15 November.</li>
-      <li>Instagram top posts include posts shared with MNRE by the PM Surya Ghar and Bharat RE Summit accounts. View counts keep growing for a few days, so they can differ slightly from earlier pulls. LinkedIn and posts published are not in this version.</li>
-    </ul>
-  </section>
-
   <details>
     <summary>Where the numbers come from</summary>
-    <p class="mn-note">Instagram and Facebook: Meta Business Suite, Insights, Results. YouTube: YouTube Studio, Advanced mode, with a custom date range. X: X Analytics, Account overview, with a custom date range. All pulled on 19 November 2026 from the MNRE accounts. Weekly figures are as each platform reported them, apart from Instagram and Facebook totals that were added up from the daily values Meta shows.</p>
+    <p class="mn-note">Instagram and Facebook: Meta Business Suite, Insights, Results. YouTube: YouTube Studio, Advanced mode, with a custom date range. X: X Analytics, Account overview, with a custom date range. All pulled on 19 November 2026 from the MNRE accounts. Meta groups days in Pacific Time and lists post times in Indian time; X Analytics and YouTube Studio follow their own day boundaries. Weekly figures are as each platform reported them, apart from Instagram and Facebook totals that were added up from the daily values Meta shows.</p>
   </details>
 </div>
 
@@ -488,8 +544,9 @@ const POSTCOUNTS = [{"id": "instagram_2026-11-09", "platform": "Instagram", "wee
 const THEMES = [{"id": "instagram_2026-11-09_capacity", "platform": "Instagram", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "Capacity milestones", "posts": 3, "views": 11139}, {"id": "instagram_2026-11-09_psg", "platform": "Instagram", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "PM Surya Ghar", "posts": 4, "views": 36281}, {"id": "instagram_2026-11-09_summit", "platform": "Instagram", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "Bharat RE Summit", "posts": 12, "views": 30746}, {"id": "facebook_2026-11-09_capacity", "platform": "Facebook", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "Capacity milestones", "posts": 3, "views": 6986}, {"id": "facebook_2026-11-09_summit", "platform": "Facebook", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "Bharat RE Summit", "posts": 2, "views": 1650}, {"id": "facebook_2026-11-09_psg", "platform": "Facebook", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "PM Surya Ghar", "posts": 1, "views": 915}, {"id": "facebook_2026-11-09_events", "platform": "Facebook", "week_start": "2026-11-09", "week_label": "9–15 Nov", "theme": "Event photos and clips", "posts": 40, "views": 4004}, {"id": "instagram_2026-11-02_summit", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Bharat RE Summit", "posts": 86, "views": 1650453}, {"id": "instagram_2026-11-02_psg", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "PM Surya Ghar", "posts": 19, "views": 1041146}, {"id": "instagram_2026-11-02_sector", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Sector and policy messages", "posts": 10, "views": 353832}, {"id": "instagram_2026-11-02_minister", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Minister and events", "posts": 2, "views": 137152}, {"id": "instagram_2026-11-02_events", "platform": "Instagram", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Event photos and clips", "posts": 1, "views": 1008}, {"id": "facebook_2026-11-02_events", "platform": "Facebook", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Event photos and clips", "posts": 79, "views": 9354}, {"id": "facebook_2026-11-02_summit", "platform": "Facebook", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Bharat RE Summit", "posts": 1, "views": 1822}, {"id": "facebook_2026-11-02_sector", "platform": "Facebook", "week_start": "2026-11-02", "week_label": "2–8 Nov", "theme": "Sector and policy messages", "posts": 1, "views": 84}];
 const FOLLOWERS = [{"id": "instagram", "platform": "Instagram", "followers": 43115, "as_of": "19 Nov", "net_w0": 997, "net_w1": 423, "net_w2": 204, "method": "Net is follows minus unfollows from Meta Insights. The last period covers 16 to 18 Nov, the days Meta had reported."}, {"id": "facebook", "platform": "Facebook", "followers": 85883, "as_of": "19 Nov", "net_w0": 246, "net_w1": 97, "net_w2": 89, "method": "Net follows from Meta Insights. The last period covers 16 to 19 Nov."}, {"id": "youtube", "platform": "YouTube", "followers": 26242, "as_of": "20 Nov", "net_w0": 16, "net_w1": 19, "net_w2": 13, "method": "Net subscribers from YouTube Studio. The last period covers 16 to 20 Nov."}, {"id": "x", "platform": "X", "followers": 314400, "as_of": "20 Nov", "method": "Rounded to the nearest hundred in X Analytics. X does not show follower growth in a form I could read, so growth is blank."}];
 const AUDIENCE = [{"id": "instagram", "platform": "Instagram", "men_pct": 90.7, "women_pct": 9.3, "age_18_24": 12.9, "age_25_34": 51.9, "age_35_44": 25.8, "age_45_54": 6.7, "age_55_plus": 2.7, "top_city": "Delhi (5.3%)", "india_pct": 96.8, "notes": "Followers. Next cities are Ahmedabad, Bengaluru and Mumbai."}, {"id": "facebook", "platform": "Facebook", "men_pct": 90.5, "women_pct": 9.5, "age_18_24": 5.1, "age_25_34": 42.1, "age_35_44": 33.8, "age_45_54": 12.3, "age_55_plus": 6.7, "top_city": "Delhi (4.6%)", "india_pct": 91.2, "notes": "Followers. Older than Instagram; Bangladesh is the next country at 0.8%."}, {"id": "youtube", "platform": "YouTube", "notes": "Studio shows only the top group among viewers: men aged 25 to 34."}, {"id": "x", "platform": "X", "men_pct": 91.8, "women_pct": 7.2, "age_18_24": 9.5, "age_25_34": 38.9, "age_35_44": 17.9, "age_45_54": 17.9, "age_55_plus": 14.8, "india_pct": 93.8, "notes": "Audience reached over 28 days, gender is inferred, and 1.1% are aged 13 to 17. No city data."}];
+const ENGAGEMENT = [{"id": "instagram_2026-11-09", "platform": "Instagram", "week_start": "2026-11-09", "week_label": "9–15 Nov", "items": 20, "likes": 686, "comments": 4, "shares": 126, "saves": 11, "reel_watch_sec_per_view": 6.1, "reels_measured": 2, "notes": "Counted on the 20 posts Meta lists as published that week (includes one on the morning of 16 Nov, Indian time). Reel watch time is total watch time divided by views on the 2 reels: 16 h 8 min over 9,574 views."}, {"id": "facebook_2026-11-09", "platform": "Facebook", "week_start": "2026-11-09", "week_label": "9–15 Nov", "items": 14, "likes": 117, "comments": 10, "shares": 31, "notes": "Counted on the 14 items Meta lists for that week. Photos inside albums may not be listed one by one. Facebook has no saves figure, and Meta shows no reel watch time for these items."}];
 window.dash = (function () {
-  const sources = { weekly: WEEKLY, daily: DAILY, paid: PAID, top: TOP, comments: COMMENTS, ormcounts: ORMCOUNTS, postcounts: POSTCOUNTS, themes: THEMES, followers: FOLLOWERS, audience: AUDIENCE };
+  const sources = { weekly: WEEKLY, daily: DAILY, paid: PAID, top: TOP, comments: COMMENTS, ormcounts: ORMCOUNTS, postcounts: POSTCOUNTS, themes: THEMES, followers: FOLLOWERS, audience: AUDIENCE, engagement: ENGAGEMENT };
   const calcs = {};
   const draws = [];
   function data(id) {
@@ -526,10 +583,10 @@ const parseDay = d3.utcParse('%Y-%m-%d');
 const dayLabel = d3.utcFormat('%-d %b');
 
 const METRIC_DEFS = {
-  Instagram: [['views', 'Views', 'n'], ['reach', 'Reach', 'n'], ['engagements', 'Content interactions', 'n'], ['profile_visits', 'Profile visits', 'n'], ['new_follows', 'New follows', 'n'], ['link_clicks', 'Link clicks', 'n']],
-  Facebook: [['views', 'Views', 'n'], ['reach', 'Viewers', 'n'], ['engagements', 'Content interactions', 'n'], ['profile_visits', 'Page visits', 'n'], ['new_follows', 'New follows', 'n'], ['link_clicks', 'Link clicks', 'n']],
+  Instagram: [['views', 'Views', 'n'], ['reach', 'Reach, organic', 'n'], ['reach_paid', 'Reach, paid (ads)', 'n'], ['engagements', 'Total interactions', 'n'], ['likes', 'Likes \u2020', 'n'], ['comments', 'Comments \u2020', 'n'], ['shares', 'Shares \u2020', 'n'], ['saves', 'Saves \u2020', 'n'], ['reel_watch_sec_per_view', 'Reel watch time per view, seconds \u2020', 'sec'], ['profile_visits', 'Profile visits', 'n'], ['new_follows', 'New follows', 'n'], ['link_clicks', 'Link clicks', 'n']],
+  Facebook: [['views', 'Views', 'n'], ['reach', 'Viewers, organic', 'n'], ['reach_paid', 'Viewers, paid (ads)', 'n'], ['engagements', 'Total interactions', 'n'], ['likes', 'Reactions \u2020', 'n'], ['comments', 'Comments \u2020', 'n'], ['shares', 'Shares \u2020', 'n'], ['profile_visits', 'Page visits', 'n'], ['new_follows', 'New follows', 'n'], ['link_clicks', 'Link clicks', 'n']],
   YouTube: [['views', 'Views', 'n'], ['impressions', 'Thumbnail impressions', 'n'], ['ctr', 'Thumbnail click-through (%)', 'pct'], ['watch_hours', 'Watch time (hours)', 'hours'], ['new_follows', 'Net new subscribers', 'n']],
-  X: [['views', 'Impressions', 'n'], ['engagements', 'Engagements', 'n'], ['engagement_rate', 'Engagement rate (%)', 'pct'], ['profile_visits', 'Profile visits', 'n'], ['likes', 'Likes', 'n'], ['reposts', 'Reposts', 'n'], ['replies', 'Replies', 'n']]
+  X: [['views', 'Impressions', 'n'], ['engagements', 'Total engagements', 'n'], ['engagement_rate', 'Engagement rate (%)', 'pct'], ['likes', 'Likes', 'n'], ['replies', 'Replies', 'n'], ['reposts', 'Reposts', 'n'], ['profile_visits', 'Profile visits', 'n']]
 };
 
 dash.calc('orm', {
@@ -578,6 +635,37 @@ dash.calc('followcalc', {
   }
 });
 
+dash.calc('pubcalc', {
+  title: 'Posts published by platform with change',
+  description: 'Posts published in the latest week and the week before, with the split by reels, carousels, static photos and other, one row per platform plus a total.',
+  inputs: ['postcounts'],
+  fn: (rows) => {
+    const weeks = Array.from(new Set(rows.map((r) => r.week_start))).sort();
+    const cur = weeks[weeks.length - 1];
+    const prev = weeks[weeks.length - 2];
+    const order = ['Instagram', 'Facebook', 'YouTube', 'X'];
+    const fields = ['posts', 'reels', 'carousels', 'photos', 'other'];
+    const get = (w, p) => rows.find((r) => r.week_start === w && r.platform === p) || {};
+    const nz = (v) => (v === undefined ? null : v);
+    const out = order.map((p) => {
+      const c = get(cur, p);
+      const q = get(prev, p);
+      const o = { key: p.toLowerCase(), platform: p };
+      fields.forEach((k) => { o[k] = nz(c[k]); o[k + '_prev'] = nz(q[k]); });
+      o.posts_chg = o.posts !== null && o.posts_prev !== null ? o.posts - o.posts_prev : null;
+      return o;
+    });
+    const all = { key: 'all', platform: 'All platforms' };
+    fields.forEach((k) => {
+      all[k] = out.reduce((a, r) => a + (r[k] || 0), 0);
+      all[k + '_prev'] = out.reduce((a, r) => a + (r[k + '_prev'] || 0), 0);
+    });
+    all.posts_chg = all.posts - all.posts_prev;
+    out.push(all);
+    return out;
+  }
+});
+
 dash.calc('tiles', {
   title: 'Detail button figures',
   description: 'One headline figure for each detail section: ad spend found, views on the best post, comments read and posts published in the latest week.',
@@ -598,17 +686,24 @@ dash.calc('tiles', {
 
 dash.calc('metrics', {
   title: 'Weekly metrics with change',
-  description: 'Each platform metric for the latest Monday to Sunday week, the week before, and the change between them (percent for counts, points for rates).',
-  inputs: ['weekly'],
-  fn: (weekly) => {
+  description: 'Each platform metric for the latest Monday to Sunday week, the week before, and the change between them (percent for counts, points for rates). Likes, comments, shares, saves and reel watch time come from the posts published that week; paid reach is zero where no ad campaigns were found.',
+  inputs: ['weekly', 'engagement', 'paid'],
+  fn: (weekly, engagement, paid) => {
+    const rec = (p, w) => {
+      const base = weekly.find((r) => r.platform === p && r.week_start === w);
+      if (!base) return {};
+      const eng = engagement.find((r) => r.platform === p && r.week_start === w) || {};
+      const pd = paid.find((r) => r.platform === p);
+      return Object.assign({}, base, eng, { reach_paid: pd && pd.ads_found === 'None' ? 0 : null });
+    };
     const starts = Array.from(new Set(weekly.map((r) => r.week_start))).sort();
     const cur = starts[starts.length - 1];
     const prev = starts[starts.length - 2];
     const num = (v) => (v === null || v === undefined || v === '' ? null : Number(v));
     const out = [];
     Object.keys(METRIC_DEFS).forEach((p) => {
-      const c = weekly.find((r) => r.platform === p && r.week_start === cur) || {};
-      const q = weekly.find((r) => r.platform === p && r.week_start === prev) || {};
+      const c = rec(p, cur);
+      const q = rec(p, prev);
       METRIC_DEFS[p].forEach(([f, label, unit]) => {
         const a = num(c[f]);
         const b = num(q[f]);
@@ -666,22 +761,6 @@ function changeClass(v) { return v > 0 ? 'mn-up' : v < 0 ? 'mn-down' : ''; }
 dash.draw('cur_label', (el) => { el.textContent = weekLabel('cur') || '—'; });
 dash.draw('prev_label', (el) => { el.textContent = weekLabel('prev') || '—'; });
 
-dash.draw('takeaway', (el) => {
-  const rows = okRows('wow');
-  el.replaceChildren();
-  if (!rows || !rows.length) { el.textContent = '—'; return; }
-  const withViews = rows.filter((r) => r.views_chg !== null);
-  if (!withViews.length) { el.textContent = '—'; return; }
-  const down = withViews.filter((r) => r.views_chg < 0);
-  const worst = withViews.slice().sort((a, b) => a.views_chg - b.views_chg)[0];
-  const lead = down.length === withViews.length ? 'Views fell on every platform' : down.length === 0 ? 'Views rose on every platform' : 'Views were mixed across platforms';
-  el.append(document.createTextNode(lead + '; the sharpest move was on ' + worst.platform + ', at '));
-  const s = document.createElement('b');
-  mark(s, 'wow', 'views_chg', 'platform=' + worst.platform);
-  s.textContent = fmtPct(worst.views_chg);
-  el.append(s, document.createTextNode(' against the week before.'));
-});
-
 dash.draw('score_rows', (tb) => {
   const rows = okRows('wow');
   tb.replaceChildren();
@@ -720,37 +799,6 @@ function showTip(el, tip, event, text) {
   tip.style.left = x + 'px';
   tip.style.top = Math.max(0, event.clientY - box.top - 34) + 'px';
 }
-
-dash.draw('chg', (el) => {
-  const g = dash.data('wow');
-  el.replaceChildren();
-  if (g.status === 'error') { el.textContent = 'Failed to load'; return; }
-  if (g.status !== 'ok') { el.textContent = '—'; return; }
-  const f = el.dataset.field;
-  const rows = g.data.filter((r) => r[f] !== null);
-  if (!rows.length) { el.textContent = 'No data yet'; return; }
-  const W = Math.max(260, el.clientWidth || 300);
-  const rowH = 36;
-  const m = { t: 8, r: 64, b: 8, l: 76 };
-  const H = m.t + m.b + rows.length * rowH;
-  const lo = Math.min(0, d3.min(rows, (r) => r[f]));
-  const hi = Math.max(0, d3.max(rows, (r) => r[f]));
-  const x = d3.scaleLinear([lo, hi === lo ? lo + 1 : hi], [m.l, W - m.r]);
-  const svg = d3.select(el).append('svg').attr('viewBox', '0 0 ' + W + ' ' + H).attr('role', 'img').attr('aria-label', el.dataset.label || 'Change by platform');
-  const tip = tipFor(el);
-  rows.forEach((r, i) => {
-    const y = m.t + i * rowH;
-    const x0 = x(0);
-    const x1 = x(r[f]);
-    svg.append('text').attr('x', m.l - 8).attr('y', y + rowH / 2 + 4).attr('text-anchor', 'end').text(r.platform);
-    svg.append('rect').attr('x', Math.min(x0, x1)).attr('y', y + 6).attr('width', Math.max(1, Math.abs(x1 - x0))).attr('height', rowH - 12).attr('rx', 3)
-      .style('fill', r[f] < 0 ? 'var(--color-bad)' : 'var(--color-ok)')
-      .on('mousemove', (event) => showTip(el, tip, event, r.platform + ': ' + fmtPct(r[f])))
-      .on('mouseleave', () => { tip.hidden = true; });
-    svg.append('text').attr('x', W - 4).attr('y', y + rowH / 2 + 4).attr('text-anchor', 'end').text(fmtPct(r[f]));
-  });
-  svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', m.t).attr('y2', H - m.b).style('stroke', 'var(--cds-chart-axis)');
-});
 
 dash.draw('daily', (el) => {
   const g = dash.data('daily');
@@ -1089,6 +1137,71 @@ dash.draw('audience_rows', (tb) => {
   });
 });
 
+dash.draw('pub_rows', (tb) => {
+  const rows = okRows('pubcalc');
+  tb.replaceChildren();
+  if (!rows) return;
+  rows.forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-key', r.key);
+    [r.platform, r.posts, r.posts_prev, r.posts_chg, r.reels, r.carousels, r.photos, r.other].forEach((v, i) => {
+      const td = document.createElement('td');
+      if (i === 0) td.textContent = v;
+      else if (v === null || v === undefined) { td.textContent = '\u2013'; td.className = 'mn-na'; }
+      else if (i === 3) { td.textContent = (v > 0 ? '+' : '') + fmtInt(v); td.className = changeClass(v); }
+      else td.textContent = fmtInt(v);
+      if (r.key === 'all') td.style.fontWeight = '600';
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+});
+
+dash.draw('stat', (el) => {
+  const rows = okRows('pubcalc');
+  if (!rows) { el.textContent = '\u2014'; return; }
+  const r = rows.find((x) => x.key === 'all');
+  const f = el.dataset.stat;
+  if (!r || r[f] === null || r[f] === undefined) { el.textContent = '\u2014'; return; }
+  mark(el, 'pubcalc', f, 'key=all');
+  el.textContent = fmtInt(r[f]);
+});
+
+dash.draw('comments_rows', (tb) => {
+  const rows = okRows('comments');
+  tb.replaceChildren();
+  if (!rows) return;
+  const order = ['Instagram', 'Facebook', 'YouTube', 'X'];
+  rows.slice().sort((a, b) => order.indexOf(a.platform) - order.indexOf(b.platform)).forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-key', r.id);
+    [r.platform, null, r.sentiment, r.summary, r.needs_reply ? 'Yes' : 'No'].forEach((v, i) => {
+      const td = document.createElement('td');
+      td.style.textAlign = 'left';
+      if (i === 1) {
+        if (r.link) {
+          const a = document.createElement('a');
+          a.href = r.link;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = r.post;
+          td.append(a);
+        } else td.textContent = r.post;
+        td.style.whiteSpace = 'normal';
+        td.style.minWidth = '160px';
+      } else {
+        td.textContent = v;
+        if (i === 3) { td.style.whiteSpace = 'normal'; td.style.minWidth = '260px'; }
+        if (i === 2 && v === 'Negative') td.className = 'mn-down';
+        if (i === 2 && v === 'Positive') td.className = 'mn-up';
+        if (i === 4 && v === 'Yes') td.className = 'mn-down';
+      }
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+});
+
 dash.draw('peak', (el) => {
   const rows = okRows('daily');
   if (!rows) { el.textContent = '—'; return; }
@@ -1114,6 +1227,8 @@ document.querySelectorAll('.mn-tile').forEach((btn) => {
     }
   });
 });
+const dailyBox = document.getElementById('mn-daily-details');
+if (dailyBox) dailyBox.addEventListener('toggle', () => { if (dailyBox.open) dash.draw('daily'); });
 
 
 dash.run();
