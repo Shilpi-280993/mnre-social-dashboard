@@ -192,7 +192,6 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
       <button type="button" role="tab" class="mn-tabbtn" id="tab-facebook" aria-selected="false" aria-controls="pane-facebook">Facebook</button>
       <button type="button" role="tab" class="mn-tabbtn" id="tab-youtube" aria-selected="false" aria-controls="pane-youtube">YouTube</button>
       <button type="button" role="tab" class="mn-tabbtn" id="tab-x" aria-selected="false" aria-controls="pane-x">X (Twitter)</button>
-      <button type="button" role="tab" class="mn-tabbtn" id="tab-linkedin" aria-selected="false" aria-controls="pane-linkedin">LinkedIn</button>
     </div>
     <div class="mn-tabpanel" id="pane-overall" role="tabpanel" aria-labelledby="tab-overall">
       <div class="mn-scroll">
@@ -204,13 +203,12 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
               <th>Facebook</th>
               <th>YouTube</th>
               <th>X</th>
-              <th>LinkedIn</th>
             </tr>
           </thead>
           <tbody data-draw="matrix_rows"></tbody>
         </table>
       </div>
-      <p class="mn-note">– means the platform does not report that figure, or it was not read. Views are impressions on X. On X, replies are counted as comments and reposts as shares. YouTube follows are net new subscribers. † Counted on the posts published in the latest week, so not comparable with the account totals; the week before was not read reliably. Compare each platform only with its own earlier week: platforms count views differently, and reach is a unique count that cannot be added across platforms. Paid reach is zero because no ad campaigns were found in MNRE's own ad accounts, so reach is treated as organic; ads run from other accounts would not show. LinkedIn is not connected yet.</p>
+      <p class="mn-note">– means the platform does not report that figure, or it was not read. Views are impressions on X. On X, replies are counted as comments and reposts as shares. YouTube follows are net new subscribers. † Counted on the posts published in the latest week, so not comparable with the account totals; the week before was not read reliably. Compare each platform only with its own earlier week: platforms count views differently, and reach is a unique count that cannot be added across platforms. Paid reach is zero because no ad campaigns were found in MNRE's own ad accounts, so reach is treated as organic; ads run from other accounts would not show.</p>
     </div>
     <div class="mn-tabpanel" id="pane-instagram" role="tabpanel" aria-labelledby="tab-instagram" hidden>
       <div class="mn-card"><div class="mn-scroll" data-draw="card" data-platform="Instagram" data-source="metrics"></div>
@@ -245,12 +243,6 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
     </div>
     <div class="mn-tabpanel" id="pane-x" role="tabpanel" aria-labelledby="tab-x" hidden>
       <div class="mn-card"><div class="mn-scroll" data-draw="card" data-platform="X" data-source="metrics"></div></div>
-    </div>
-    <div class="mn-tabpanel" id="pane-linkedin" role="tabpanel" aria-labelledby="tab-linkedin" hidden>
-      <div class="mn-card mn-pending">
-        <h3>LinkedIn</h3>
-        <p>Not included yet. LinkedIn was signed out in the MNRE browser profile. Once the page admin signs in, impressions, reactions, followers and page views for the same two weeks go here.</p>
-      </div>
     </div>
   </section>
 
@@ -497,7 +489,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
         <tbody data-draw="audience_rows"></tbody>
       </table>
     </div>
-    <p class="mn-note">Instagram and Facebook totals and audience are followers, from Meta Business Suite. Net growth is follows minus unfollows. The follower count on 2 November is an estimate worked back from today's total and the net growth since, so it will be off if platforms removed inactive accounts. X totals are rounded. The tile adds the four totals, but the same person can follow several accounts, so it is not a count of unique people. LinkedIn is not included yet.</p>
+    <p class="mn-note">Instagram and Facebook totals and audience are followers, from Meta Business Suite. Net growth is follows minus unfollows. The follower count on 2 November is an estimate worked back from today's total and the net growth since, so it will be off if platforms removed inactive accounts. X totals are rounded. The tile adds the four totals, but the same person can follow several accounts, so it is not a count of unique people.</p>
   </section>
 
   <section id="mn-comments" class="mn-sec">
@@ -555,7 +547,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
 </div>
 
 
-<p class="foot">Snapshot of data pulled on 19 and 20 November 2026 from the MNRE accounts on Meta Business Suite, Instagram, YouTube Studio, X Analytics and the ad managers. LinkedIn is not included yet.</p>
+<p class="foot">Snapshot of data pulled on 19 and 20 November 2026 from the MNRE accounts on Meta Business Suite, Instagram, YouTube Studio, X Analytics and the ad managers.</p>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
@@ -1231,7 +1223,7 @@ dash.draw('matrix_rows', (tb) => {
   const rows = okRows('metrics');
   tb.replaceChildren();
   if (!rows) return;
-  const plats = ['Instagram', 'Facebook', 'YouTube', 'X', 'LinkedIn'];
+  const plats = ['Instagram', 'Facebook', 'YouTube', 'X'];
   const lines = [
     ['views', 'Views (impressions on X)'], ['reach', 'Reach, organic'], ['reach_paid', 'Reach, paid (ads)'],
     ['engagements', 'Total interactions'], ['engagement_rate', 'Engagement rate (%)'],
