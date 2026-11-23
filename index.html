@@ -121,9 +121,9 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
     <p class="mn-weeks">Latest week <b data-draw="cur_label">—</b> compared with <b data-draw="prev_label">—</b>. Weeks run Monday to Sunday.</p>
     <nav class="mn-nav" aria-label="Sections">
       <a href="#mn-inputs">1 Overall inputs</a>
+      <a href="#mn-tiles">More detail</a>
       <a href="#mn-performance">2 Overall performance</a>
       <a href="#mn-working">3 What is working</a>
-      <a href="#mn-tiles">More detail</a>
       <a href="#mn-comments">4 Comments</a>
     </nav>
   </header>
@@ -176,161 +176,6 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
       </table>
     </div>
     <p class="mn-note">Instagram and Facebook counts are from Meta Business Suite, YouTube counts long-form uploads only, and X counts original posts only (reposts are left out). Facebook counts every photo in an album as a post: <b data-draw="pc" data-pc="Facebook:album_photos:cur">—</b> of its <b data-draw="pc" data-pc="Facebook:photos:cur">—</b> photos are from one album. Other is live videos, links and text posts. Stories are not counted.</p>
-  </section>
-
-  <section id="mn-performance" class="mn-sec">
-    <div class="mn-sechead">
-      <span class="mn-num" aria-hidden="true">2</span>
-      <div>
-        <h2>Overall performance</h2>
-        <p class="mn-note">Latest week against the week before. The Overall tab shows every platform in one table; pick a platform for its own table.</p>
-      </div>
-    </div>
-    <div class="mn-tabs" role="tablist" aria-label="Platforms">
-      <button type="button" role="tab" class="mn-tabbtn mn-tab-on" id="tab-overall" aria-selected="true" aria-controls="pane-overall">Overall</button>
-      <button type="button" role="tab" class="mn-tabbtn" id="tab-instagram" aria-selected="false" aria-controls="pane-instagram">Instagram</button>
-      <button type="button" role="tab" class="mn-tabbtn" id="tab-facebook" aria-selected="false" aria-controls="pane-facebook">Facebook</button>
-      <button type="button" role="tab" class="mn-tabbtn" id="tab-youtube" aria-selected="false" aria-controls="pane-youtube">YouTube</button>
-      <button type="button" role="tab" class="mn-tabbtn" id="tab-x" aria-selected="false" aria-controls="pane-x">X (Twitter)</button>
-    </div>
-    <div class="mn-tabpanel" id="pane-overall" role="tabpanel" aria-labelledby="tab-overall">
-      <div class="mn-scroll">
-        <table class="mn-table mn-matrix">
-          <thead>
-            <tr>
-              <th>Latest week (change)</th>
-              <th>Instagram</th>
-              <th>Facebook</th>
-              <th>YouTube</th>
-              <th>X</th>
-            </tr>
-          </thead>
-          <tbody data-draw="matrix_rows"></tbody>
-        </table>
-      </div>
-      <p class="mn-note">– means the platform does not report that figure, or it was not read. Views are impressions on X. On X, replies are counted as comments and reposts as shares. YouTube follows are net new subscribers. † Counted on the posts published in the latest week, so not comparable with the account totals; the week before was not read reliably. Compare each platform only with its own earlier week: platforms count views differently, and reach is a unique count that cannot be added across platforms. Paid reach is zero because no ad campaigns were found in MNRE's own ad accounts, so reach is treated as organic; ads run from other accounts would not show.</p>
-    </div>
-    <div class="mn-tabpanel" id="pane-instagram" role="tabpanel" aria-labelledby="tab-instagram" hidden>
-      <div class="mn-card"><div class="mn-scroll" data-draw="card" data-platform="Instagram" data-source="metrics"></div>
-        <p class="mn-note">† Counted on the posts published in the latest week, so not comparable with the account totals above it. The week before was not read reliably, so it shows n/a. Paid reach is zero because no ad campaigns were found in MNRE's own ad accounts.</p></div>
-      <div class="mn-grid">
-        <div class="mn-card">
-          <h3>Instagram, daily views</h3>
-          <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Instagram" data-metric="views" data-label="Instagram, daily views, 2 to 15 November"></div>
-        </div>
-        <div class="mn-card">
-          <h3>Instagram, daily interactions</h3>
-          <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Instagram" data-metric="interactions" data-label="Instagram, daily interactions, 2 to 15 November"></div>
-        </div>
-      </div>
-    </div>
-    <div class="mn-tabpanel" id="pane-facebook" role="tabpanel" aria-labelledby="tab-facebook" hidden>
-      <div class="mn-card"><div class="mn-scroll" data-draw="card" data-platform="Facebook" data-source="metrics"></div>
-        <p class="mn-note">† Counted on the items Meta lists as published in the latest week, so not comparable with the account totals above it. Facebook has no saves figure. Paid viewers is zero because no ad campaigns were found in MNRE's own ad accounts.</p></div>
-      <div class="mn-grid">
-        <div class="mn-card">
-          <h3>Facebook, daily views</h3>
-          <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Facebook" data-metric="views" data-label="Facebook, daily views, 2 to 15 November"></div>
-        </div>
-        <div class="mn-card">
-          <h3>Facebook, daily interactions</h3>
-          <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Facebook" data-metric="interactions" data-label="Facebook, daily interactions, 2 to 15 November"></div>
-        </div>
-      </div>
-    </div>
-    <div class="mn-tabpanel" id="pane-youtube" role="tabpanel" aria-labelledby="tab-youtube" hidden>
-      <div class="mn-card"><div class="mn-scroll" data-draw="card" data-platform="YouTube" data-source="metrics"></div></div>
-    </div>
-    <div class="mn-tabpanel" id="pane-x" role="tabpanel" aria-labelledby="tab-x" hidden>
-      <div class="mn-card"><div class="mn-scroll" data-draw="card" data-platform="X" data-source="metrics"></div></div>
-    </div>
-  </section>
-
-  <section id="mn-working" class="mn-sec">
-    <div class="mn-sechead">
-      <span class="mn-num" aria-hidden="true">3</span>
-      <div>
-        <h2>What is working and what is not</h2>
-        <p class="mn-note">Three pointers each way, for all platforms together and for each platform.</p>
-      </div>
-    </div>
-    <div class="mn-grid">
-      <div class="mn-card mn-sum">
-        <h3>Overall</h3>
-        <h4 class="mn-gw">Going well</h4>
-        <ul class="mn-sumlist">
-          <li>Practical Hindi content from the PM Surya Ghar account leads: its best post reached <b data-draw="t" data-t="Instagram:1:views">—</b> views.</li>
-          <li>Everything is organic: no paid campaigns were found, yet Instagram had <b data-draw="m" data-m="Instagram:views:prev">—</b> views in the summit week.</li>
-          <li>The audience response is warm: <b data-draw="o" data-o="2026-11-02:Instagram:positive">—</b> of <b data-draw="o" data-o="2026-11-02:Instagram:read">—</b> Instagram comments in the summit week were praise.</li>
-        </ul>
-        <h4 class="mn-ni">Needs improvement</h4>
-        <ul class="mn-sumlist">
-          <li>Reach fell on every platform after the summit: Instagram <b data-draw="m" data-m="Instagram:views:chg">—</b>, X <b data-draw="m" data-m="X:views:chg">—</b>, Facebook <b data-draw="m" data-m="Facebook:views:chg">—</b>, YouTube <b data-draw="m" data-m="YouTube:views:chg">—</b>.</li>
-          <li>Few people click through: <b data-draw="m" data-m="Instagram:link_clicks:cur">—</b> link clicks on Instagram and <b data-draw="m" data-m="Facebook:link_clicks:cur">—</b> on Facebook in the latest week.</li>
-          <li>Public questions wait for answers: loan and subsidy complaints on Facebook and a query on X were flagged as needing a reply.</li>
-        </ul>
-      </div>
-      <div class="mn-card mn-sum">
-        <h3>Instagram</h3>
-        <h4 class="mn-gw">Going well</h4>
-        <ul class="mn-sumlist">
-          <li>PM Surya Ghar collaborations dominate: four of the five most viewed posts.</li>
-          <li>The summit week peaked at <b data-draw="peak" data-p="Instagram:views:value">—</b> views on a single day, <b data-draw="peak" data-p="Instagram:views:date">—</b>.</li>
-          <li>Carousels and reels carry the reach: the top three posts are two carousels and one reel.</li>
-        </ul>
-        <h4 class="mn-ni">Needs improvement</h4>
-        <ul class="mn-sumlist">
-          <li>Views changed by <b data-draw="m" data-m="Instagram:views:chg">—</b> against the summit week.</li>
-          <li>New follows changed by <b data-draw="m" data-m="Instagram:new_follows:chg">—</b>.</li>
-          <li>Posting slowed from <b data-draw="pc" data-pc="Instagram:posts:prev">—</b> posts in the summit week to <b data-draw="pc" data-pc="Instagram:posts:cur">—</b>.</li>
-        </ul>
-      </div>
-      <div class="mn-card mn-sum">
-        <h3>Facebook</h3>
-        <h4 class="mn-gw">Going well</h4>
-        <ul class="mn-sumlist">
-          <li>Capacity-milestone photos are the top performers: the best reached <b data-draw="t" data-t="Facebook:1:views">—</b> views.</li>
-          <li>The page is still gaining followers: <b data-draw="m" data-m="Facebook:new_follows:cur">—</b> new follows in the latest week.</li>
-          <li>Event coverage is thorough: <b data-draw="pc" data-pc="Facebook:album_photos:cur">—</b> photos from one event album on 11 November.</li>
-        </ul>
-        <h4 class="mn-ni">Needs improvement</h4>
-        <ul class="mn-sumlist">
-          <li>Views changed by <b data-draw="m" data-m="Facebook:views:chg">—</b>.</li>
-          <li>Interactions changed by <b data-draw="m" data-m="Facebook:engagements:chg">—</b>.</li>
-          <li>Photo albums earn little: <b data-draw="th" data-th="2026-11-09:Facebook:Event photos and clips:posts">—</b> event photo and clip posts got <b data-draw="th" data-th="2026-11-09:Facebook:Event photos and clips:views">—</b> views in total.</li>
-        </ul>
-      </div>
-      <div class="mn-card mn-sum">
-        <h3>YouTube</h3>
-        <h4 class="mn-gw">Going well</h4>
-        <ul class="mn-sumlist">
-          <li>Thumbnail click-through rose from <b data-draw="m" data-m="YouTube:ctr:prev">—</b> to <b data-draw="m" data-m="YouTube:ctr:cur">—</b> percent.</li>
-          <li>It is the only platform where net subscribers grew, by <b data-draw="m" data-m="YouTube:new_follows:chg">—</b>.</li>
-          <li>How-to videos hold interest: the top video drew <b data-draw="t" data-t="YouTube:1:views">—</b> views in the week.</li>
-        </ul>
-        <h4 class="mn-ni">Needs improvement</h4>
-        <ul class="mn-sumlist">
-          <li>Views changed by <b data-draw="m" data-m="YouTube:views:chg">—</b> and thumbnail impressions by <b data-draw="m" data-m="YouTube:impressions:chg">—</b>.</li>
-          <li>No new long-form videos: <b data-draw="pc" data-pc="YouTube:posts:cur">—</b> uploaded in the latest week.</li>
-          <li>No viewer comments: <b data-draw="o" data-o="2026-11-09:YouTube:read">—</b> read in the latest week, so there is no conversation to learn from.</li>
-        </ul>
-      </div>
-      <div class="mn-card mn-sum">
-        <h3>X</h3>
-        <h4 class="mn-gw">Going well</h4>
-        <ul class="mn-sumlist">
-          <li>The engagement rate edged up from <b data-draw="m" data-m="X:engagement_rate:prev">—</b> to <b data-draw="m" data-m="X:engagement_rate:cur">—</b> percent.</li>
-          <li>Capacity-milestone posts lead: the top post reached <b data-draw="t" data-t="X:1:views">—</b> impressions.</li>
-          <li>Even with few original posts, the account reached <b data-draw="m" data-m="X:views:cur">—</b> impressions in the latest week.</li>
-        </ul>
-        <h4 class="mn-ni">Needs improvement</h4>
-        <ul class="mn-sumlist">
-          <li>Impressions changed by <b data-draw="m" data-m="X:views:chg">—</b> and engagements by <b data-draw="m" data-m="X:engagements:chg">—</b>.</li>
-          <li>Only <b data-draw="pc" data-pc="X:posts:cur">—</b> original posts in the latest week against <b data-draw="pc" data-pc="X:posts:prev">—</b> the week before; most activity is reposts.</li>
-          <li>Follower growth on X is not tracked yet, so audience growth there cannot be judged.</li>
-        </ul>
-      </div>
-    </div>
   </section>
 
   <section id="mn-tiles" class="mn-sec">
@@ -492,6 +337,162 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
     <p class="mn-note">Instagram and Facebook totals and audience are followers, from Meta Business Suite. Net growth is follows minus unfollows. The follower count on 2 November is an estimate worked back from today's total and the net growth since, so it will be off if platforms removed inactive accounts. X totals are rounded. The tile adds the four totals, but the same person can follow several accounts, so it is not a count of unique people.</p>
   </section>
 
+  <section id="mn-performance" class="mn-sec">
+    <div class="mn-sechead">
+      <span class="mn-num" aria-hidden="true">2</span>
+      <div>
+        <h2>Overall performance</h2>
+        <p class="mn-note">Latest week against the week before. The Overall tab shows every platform in one table; pick a platform for its own table.</p>
+      </div>
+    </div>
+    <div class="mn-tabs" role="tablist" aria-label="Platforms">
+      <button type="button" role="tab" class="mn-tabbtn mn-tab-on" id="tab-overall" aria-selected="true" aria-controls="pane-overall">Overall</button>
+      <button type="button" role="tab" class="mn-tabbtn" id="tab-instagram" aria-selected="false" aria-controls="pane-instagram">Instagram</button>
+      <button type="button" role="tab" class="mn-tabbtn" id="tab-facebook" aria-selected="false" aria-controls="pane-facebook">Facebook</button>
+      <button type="button" role="tab" class="mn-tabbtn" id="tab-youtube" aria-selected="false" aria-controls="pane-youtube">YouTube</button>
+      <button type="button" role="tab" class="mn-tabbtn" id="tab-x" aria-selected="false" aria-controls="pane-x">X (Twitter)</button>
+    </div>
+    <div class="mn-tabpanel" id="pane-overall" role="tabpanel" aria-labelledby="tab-overall">
+      <div class="mn-scroll">
+        <table class="mn-table mn-matrix">
+          <thead>
+            <tr>
+              <th>Latest week (change)</th>
+              <th>Instagram</th>
+              <th>Facebook</th>
+              <th>YouTube</th>
+              <th>X</th>
+            </tr>
+          </thead>
+          <tbody data-draw="matrix_rows"></tbody>
+        </table>
+      </div>
+      <p class="mn-note">– means the platform does not report that figure, or it was not read. Views are impressions on X. On X, replies are counted as comments and reposts as shares. YouTube follows are net new subscribers. † Counted on the posts published in the latest week, so not comparable with the account totals; the week before was not read reliably. Compare each platform only with its own earlier week: platforms count views differently, and reach is a unique count that cannot be added across platforms. Paid reach is zero because no ad campaigns were found in MNRE's own ad accounts, so reach is treated as organic; ads run from other accounts would not show.</p>
+    </div>
+    <div class="mn-tabpanel" id="pane-instagram" role="tabpanel" aria-labelledby="tab-instagram" hidden>
+      <div class="mn-card"><div class="mn-scroll" data-draw="card" data-platform="Instagram" data-source="metrics"></div>
+        <p class="mn-note">† Counted on the posts published in the latest week, so not comparable with the account totals above it. The week before was not read reliably, so it shows n/a. Paid reach is zero because no ad campaigns were found in MNRE's own ad accounts.</p></div>
+      <div class="mn-grid">
+        <div class="mn-card">
+          <h3>Instagram, daily views</h3>
+          <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Instagram" data-metric="views" data-label="Instagram, daily views, 2 to 15 November"></div>
+        </div>
+        <div class="mn-card">
+          <h3>Instagram, daily interactions</h3>
+          <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Instagram" data-metric="interactions" data-label="Instagram, daily interactions, 2 to 15 November"></div>
+        </div>
+      </div>
+    </div>
+    <div class="mn-tabpanel" id="pane-facebook" role="tabpanel" aria-labelledby="tab-facebook" hidden>
+      <div class="mn-card"><div class="mn-scroll" data-draw="card" data-platform="Facebook" data-source="metrics"></div>
+        <p class="mn-note">† Counted on the items Meta lists as published in the latest week, so not comparable with the account totals above it. Facebook has no saves figure. Paid viewers is zero because no ad campaigns were found in MNRE's own ad accounts.</p></div>
+      <div class="mn-grid">
+        <div class="mn-card">
+          <h3>Facebook, daily views</h3>
+          <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Facebook" data-metric="views" data-label="Facebook, daily views, 2 to 15 November"></div>
+        </div>
+        <div class="mn-card">
+          <h3>Facebook, daily interactions</h3>
+          <div class="mn-chart" data-draw="daily" data-source="daily" data-platform="Facebook" data-metric="interactions" data-label="Facebook, daily interactions, 2 to 15 November"></div>
+        </div>
+      </div>
+    </div>
+    <div class="mn-tabpanel" id="pane-youtube" role="tabpanel" aria-labelledby="tab-youtube" hidden>
+      <div class="mn-card"><div class="mn-scroll" data-draw="card" data-platform="YouTube" data-source="metrics"></div></div>
+    </div>
+    <div class="mn-tabpanel" id="pane-x" role="tabpanel" aria-labelledby="tab-x" hidden>
+      <div class="mn-card"><div class="mn-scroll" data-draw="card" data-platform="X" data-source="metrics"></div></div>
+    </div>
+  </section>
+
+  <section id="mn-working" class="mn-sec">
+    <div class="mn-sechead">
+      <span class="mn-num" aria-hidden="true">3</span>
+      <div>
+        <h2>What is working and what is not</h2>
+        <p class="mn-note">Three pointers each way, for all platforms together and for each platform.</p>
+      </div>
+    </div>
+    <div class="mn-grid">
+      <div class="mn-card mn-sum">
+        <h3>Overall</h3>
+        <h4 class="mn-gw">Going well</h4>
+        <ul class="mn-sumlist">
+          <li>Practical Hindi content from the PM Surya Ghar account leads: its best post reached <b data-draw="t" data-t="Instagram:1:views">—</b> views.</li>
+          <li>Everything is organic: no paid campaigns were found, yet Instagram had <b data-draw="m" data-m="Instagram:views:prev">—</b> views in the summit week.</li>
+          <li>The audience response is warm: <b data-draw="o" data-o="2026-11-02:Instagram:positive">—</b> of <b data-draw="o" data-o="2026-11-02:Instagram:read">—</b> Instagram comments in the summit week were praise.</li>
+        </ul>
+        <h4 class="mn-ni">Needs improvement</h4>
+        <ul class="mn-sumlist">
+          <li>Reach fell on every platform after the summit: Instagram <b data-draw="m" data-m="Instagram:views:chg">—</b>, X <b data-draw="m" data-m="X:views:chg">—</b>, Facebook <b data-draw="m" data-m="Facebook:views:chg">—</b>, YouTube <b data-draw="m" data-m="YouTube:views:chg">—</b>.</li>
+          <li>Few people click through: <b data-draw="m" data-m="Instagram:link_clicks:cur">—</b> link clicks on Instagram and <b data-draw="m" data-m="Facebook:link_clicks:cur">—</b> on Facebook in the latest week.</li>
+          <li>Public questions wait for answers: loan and subsidy complaints on Facebook and a query on X were flagged as needing a reply.</li>
+        </ul>
+      </div>
+      <div class="mn-card mn-sum">
+        <h3>Instagram</h3>
+        <h4 class="mn-gw">Going well</h4>
+        <ul class="mn-sumlist">
+          <li>PM Surya Ghar collaborations dominate: four of the five most viewed posts.</li>
+          <li>The summit week peaked at <b data-draw="peak" data-p="Instagram:views:value">—</b> views on a single day, <b data-draw="peak" data-p="Instagram:views:date">—</b>.</li>
+          <li>Carousels and reels carry the reach: the top three posts are two carousels and one reel.</li>
+        </ul>
+        <h4 class="mn-ni">Needs improvement</h4>
+        <ul class="mn-sumlist">
+          <li>Views changed by <b data-draw="m" data-m="Instagram:views:chg">—</b> against the summit week.</li>
+          <li>New follows changed by <b data-draw="m" data-m="Instagram:new_follows:chg">—</b>.</li>
+          <li>Posting slowed from <b data-draw="pc" data-pc="Instagram:posts:prev">—</b> posts in the summit week to <b data-draw="pc" data-pc="Instagram:posts:cur">—</b>.</li>
+        </ul>
+      </div>
+      <div class="mn-card mn-sum">
+        <h3>Facebook</h3>
+        <h4 class="mn-gw">Going well</h4>
+        <ul class="mn-sumlist">
+          <li>Capacity-milestone photos are the top performers: the best reached <b data-draw="t" data-t="Facebook:1:views">—</b> views.</li>
+          <li>The page is still gaining followers: <b data-draw="m" data-m="Facebook:new_follows:cur">—</b> new follows in the latest week.</li>
+          <li>Event coverage is thorough: <b data-draw="pc" data-pc="Facebook:album_photos:cur">—</b> photos from one event album on 11 November.</li>
+        </ul>
+        <h4 class="mn-ni">Needs improvement</h4>
+        <ul class="mn-sumlist">
+          <li>Views changed by <b data-draw="m" data-m="Facebook:views:chg">—</b>.</li>
+          <li>Interactions changed by <b data-draw="m" data-m="Facebook:engagements:chg">—</b>.</li>
+          <li>Photo albums earn little: <b data-draw="th" data-th="2026-11-09:Facebook:Event photos and clips:posts">—</b> event photo and clip posts got <b data-draw="th" data-th="2026-11-09:Facebook:Event photos and clips:views">—</b> views in total.</li>
+        </ul>
+      </div>
+      <div class="mn-card mn-sum">
+        <h3>YouTube</h3>
+        <h4 class="mn-gw">Going well</h4>
+        <ul class="mn-sumlist">
+          <li>Thumbnail click-through rose from <b data-draw="m" data-m="YouTube:ctr:prev">—</b> to <b data-draw="m" data-m="YouTube:ctr:cur">—</b> percent.</li>
+          <li>It is the only platform where net subscribers grew, by <b data-draw="m" data-m="YouTube:new_follows:chg">—</b>.</li>
+          <li>How-to videos hold interest: the top video drew <b data-draw="t" data-t="YouTube:1:views">—</b> views in the week.</li>
+        </ul>
+        <h4 class="mn-ni">Needs improvement</h4>
+        <ul class="mn-sumlist">
+          <li>Views changed by <b data-draw="m" data-m="YouTube:views:chg">—</b> and thumbnail impressions by <b data-draw="m" data-m="YouTube:impressions:chg">—</b>.</li>
+          <li>No new long-form videos: <b data-draw="pc" data-pc="YouTube:posts:cur">—</b> uploaded in the latest week.</li>
+          <li>No viewer comments: <b data-draw="o" data-o="2026-11-09:YouTube:read">—</b> read in the latest week, so there is no conversation to learn from.</li>
+        </ul>
+      </div>
+      <div class="mn-card mn-sum">
+        <h3>X</h3>
+        <h4 class="mn-gw">Going well</h4>
+        <ul class="mn-sumlist">
+          <li>The engagement rate edged up from <b data-draw="m" data-m="X:engagement_rate:prev">—</b> to <b data-draw="m" data-m="X:engagement_rate:cur">—</b> percent.</li>
+          <li>Capacity-milestone posts lead: the top post reached <b data-draw="t" data-t="X:1:views">—</b> impressions.</li>
+          <li>Even with few original posts, the account reached <b data-draw="m" data-m="X:views:cur">—</b> impressions in the latest week.</li>
+        </ul>
+        <h4 class="mn-ni">Needs improvement</h4>
+        <ul class="mn-sumlist">
+          <li>Impressions changed by <b data-draw="m" data-m="X:views:chg">—</b> and engagements by <b data-draw="m" data-m="X:engagements:chg">—</b>.</li>
+          <li>Only <b data-draw="pc" data-pc="X:posts:cur">—</b> original posts in the latest week against <b data-draw="pc" data-pc="X:posts:prev">—</b> the week before; most activity is reposts.</li>
+          <li>Follower growth on X is not tracked yet, so audience growth there cannot be judged.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  
   <section id="mn-comments" class="mn-sec">
     <div class="mn-sechead">
       <span class="mn-num" aria-hidden="true">4</span>
